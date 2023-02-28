@@ -19,7 +19,7 @@ def file_exists(file_name):
         boolean: returns True if the file exists and False otherwise.
     """
     # Remove pass and fill in your code here
-    return os.path.isfile(file_name)
+    pass
         
 # Function for section 3
 def parse_file(file_name):
