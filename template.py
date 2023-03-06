@@ -35,7 +35,23 @@ def parse_file(file_name):
         the names of all the people that the sick person has had contact with.
     """
     # Remove pass and fill in your code here
-    pass
+
+    contact_dict = {}
+    with open(file_name, 'r') as file:
+        for line in file:
+            line = line.strip()
+            if line:
+                try:
+                    sick_person, *contacts = line.strip().split(',')
+                    contact_dict[sick_person] = contacts
+                    # if not sick_person or not contacts:
+                    #     print("Error found in file, continuing.")
+                    # continue
+                except ValueError:
+                    print("Error found in file, continuing.")
+                    # continue
+    return contact_dict
+
 
 # Function for section 5
 def find_patients_zero(contacts_dic):
@@ -161,7 +177,8 @@ def pretty_print_section_3():
     pass
 
 def pretty_print_section_4(contact_dictionary):
-    pass
+    for sick_record in contact_dictionary:
+        print(f"{sick_record} had contact with {format_list(contact_dictionary[sick_record])}")
 
 def pretty_print_section_5(patient_zero_list):
     pass
