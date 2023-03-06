@@ -177,6 +177,7 @@ def pretty_print_section_3():
     pass
 
 def pretty_print_section_4(contact_dictionary):
+    print("Contact Records:")
     for sick_record in contact_dictionary:
         print(f"{sick_record} had contact with {format_list(contact_dictionary[sick_record])}")
 
