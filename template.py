@@ -126,8 +126,18 @@ def find_most_viral(contacts_dic):
         list: contains the names of sick people who have the largest contact
         lists
     """
-    # Remove pass and fill in your code here
-    pass
+    max_len = 0
+    most_viral = []
+
+    for patient, contacts_lst in contacts_dic.items():
+        if len(contacts_lst) > max_len:
+            max_len = len(contacts_lst)
+            most_viral = [patient]
+        elif len(contacts_lst) == max_len:
+            most_viral.append(patient)
+            
+    most_viral.sort()
+    return most_viral
     
 # Function for section 9
 def find_most_contacted(contacts_dic):
@@ -203,7 +213,7 @@ def pretty_print_section_7(not_zombie_or_patient_zero_list):
           format_list(not_zombie_or_patient_zero_list))
 
 def pretty_print_section_8(most_viral_list):
-    pass
+    print("Most Viral People:", format_list(most_viral_list))
 
 def pretty_print_section_9(most_contacted_list):
     pass

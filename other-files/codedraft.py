@@ -106,9 +106,29 @@ def find_not_zombie_nor_zero(contacts_dic, patients_zero_list, zombie_list):
     # potential_zombies = list(all_names - set(patients_zero_list) - set(zombie_list))  # find the potential zombies
     # potential_zombies.sort()
     # return potential_zombies
+
+def find_most_viral(contacts_dic):
+    max_len = 0
+    most_viral = []
+
+    for patient, contacts_lst in contacts_dic.items():
+        if len(contacts_lst) > max_len:
+            max_len = len(contacts_lst)
+            most_viral = [patient]
+        elif len(contacts_lst) == max_len:
+            most_viral.append(patient)
+
+    most_viral.sort()
+    return most_viral
+
+
 def pretty_print_section_7(not_zombie_or_patient_zero_list):
     print("Neither Patient Zero or Potential Zombie:", \
           format_list(not_zombie_or_patient_zero_list))
+    
+def pretty_print_section_8(most_viral_list):
+    print("Most Viral People:", format_list(most_viral_list))
+
 
 def main():
     #print(file_exists("sfadsf"))
@@ -116,7 +136,8 @@ def main():
     # pretty_print_section_4(parse_file("testfile.txt"))
     # pretty_print_section_5(find_patients_zero_set(parse_file("DataSet1.txt")))\
     dic = parse_file("DataSet1.txt")
-    print(find_potential_zombies(parse_file("DataSet1.txt")))
-    pretty_print_section_7(find_not_zombie_nor_zero(dic,find_patients_zero(dic),find_potential_zombies(dic)))
+    # print(find_potential_zombies(parse_file("DataSet1.txt")))
+    # pretty_print_section_7(find_not_zombie_nor_zero(dic,find_patients_zero(dic),find_potential_zombies(dic)))
+    pretty_print_section_8(find_most_viral(dic))
 if __name__ == '__main__':
     main()
