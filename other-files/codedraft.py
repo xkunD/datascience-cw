@@ -45,18 +45,18 @@ def find_patients_zero_set(contacts_dic):
         list.
     """
     # Remove pass and fill in your code here
-    all_contacts = set(contacts_dic.keys())  # get all contacts in the keys
-    contacted_contacts = set().union(*contacts_dic.values())  # get all contacts that are contacted
-    missing_contacts = list(all_contacts - contacted_contacts)  # find the missing contacts
-    missing_contacts.sort()
-    print(missing_contacts)
+    patients = set(contacts_dic.keys())  # get all contacts in the keys
+    contacts = set().union(*contacts_dic.values())  # get all contacts that are contacted
+    patient_zero = list(patients - contacts)  # find the missing contacts
+    patient_zero.sort()
+    return patient_zero
 
 
 def find_patients_zero(contacts_dic):
     sorted_contacts = []
     patient_zero = []
 
-    # iterate over each value list in sorted order, and add its
+    # iterate over each value list, and add its
     # contacts to the set of contacted contacts in a sorted manner
     for contacts in contacts_dic.values():
         i = 0
@@ -80,14 +80,21 @@ def find_patients_zero(contacts_dic):
 def pretty_print_section_5(patient_zero_list):
     print("Patient Zero(s):", format_list(patient_zero_list))
 
+def find_potential_zombies(contacts_dic):
+    patients = set(contacts_dic.keys())  # get all contacts in the keys
+    contacts = set().union(*contacts_dic.values())  # get all contacts that are contacted
+    potential_zombies = list(contacts - patients)  # find the potential zombies
+    potential_zombies.sort()
+    return potential_zombies
+
 
 
 def main():
     #print(file_exists("sfadsf"))
     # print(parse_file("testfile.txt"))
     # pretty_print_section_4(parse_file("testfile.txt"))
-    pretty_print_section_5(find_patients_zero(parse_file("DataSet1.txt")))
-
+    # pretty_print_section_5(find_patients_zero_set(parse_file("DataSet1.txt")))
+    print(find_potential_zombies(parse_file("DataSet1.txt")))
 
 if __name__ == '__main__':
     main()

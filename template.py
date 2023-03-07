@@ -67,28 +67,10 @@ def find_patients_zero(contacts_dic):
         list.
     """
 
-    sorted_contacts = []
-    patient_zero = []
-    
-    # iterate over each value list in sorted order, and add its
-    # contacts to the set of contacted contacts in a sorted manner
-    for contacts in contacts_dic.values():
-        i = 0
-        for name in contacts:
-            while i < len(sorted_contacts) and name > sorted_contacts[i]:
-                i += 1
-            if i == len(sorted_contacts) or name < sorted_contacts[i]:
-                sorted_contacts.insert(i, name)
-
-    # iterate over the sorted list of all contacts, and add any missing
-    # contacts to the missing_contacts list
-    i = 0
-    for name in contacts_dic.keys():
-        while i < len(sorted_contacts) and name > sorted_contacts[i]:
-            i += 1
-        if i == len(sorted_contacts) or name < sorted_contacts[i]:
-            patient_zero.append(name)
-
+    patients = set(contacts_dic.keys())  # all patients as a set
+    contacts = set().union(*contacts_dic.values())  # all contacts as a set
+    patient_zero = list(patients - contacts)  # find the patient zeros
+    patient_zero.sort() # sort the list
     return patient_zero
 
 # Function for section 6
@@ -104,7 +86,12 @@ def find_potential_zombies(contacts_dic):
         list: names of people who are not listed as sick.
     """
     # Remove pass and fill in your code here
-    pass
+
+    patients = set(contacts_dic.keys())  # get all contacts in the keys
+    contacts = set().union(*contacts_dic.values())  # get all contacts that are contacted
+    potential_zombies = list(contacts - patients)  # find the potential zombies
+    potential_zombies.sort()
+    return potential_zombies
 
 # Function for section 7
 def find_not_zombie_nor_zero(contacts_dic, patients_zero_list, zombie_list):
@@ -207,7 +194,7 @@ def pretty_print_section_5(patient_zero_list):
     print("Patient Zero(s):", format_list(patient_zero_list))
 
 def pretty_print_section_6(potential_zombies_list):
-    pass
+    print("Potential Zombies:", format_list(potential_zombies_list))
 
 def pretty_print_section_7(not_zombie_or_patient_zero_list):
     pass
