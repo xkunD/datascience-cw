@@ -66,8 +66,30 @@ def find_patients_zero(contacts_dic):
         list: names of people who do not appear in any sick person's contact
         list.
     """
-    # Remove pass and fill in your code here
-    pass
+
+    sorted_contacts = []
+    patient_zero = []
+    
+    # iterate over each value list in sorted order, and add its
+    # contacts to the set of contacted contacts in a sorted manner
+    for contacts in contacts_dic.values():
+        i = 0
+        for name in contacts:
+            while i < len(sorted_contacts) and name > sorted_contacts[i]:
+                i += 1
+            if i == len(sorted_contacts) or name < sorted_contacts[i]:
+                sorted_contacts.insert(i, name)
+
+    # iterate over the sorted list of all contacts, and add any missing
+    # contacts to the missing_contacts list
+    i = 0
+    for name in contacts_dic.keys():
+        while i < len(sorted_contacts) and name > sorted_contacts[i]:
+            i += 1
+        if i == len(sorted_contacts) or name < sorted_contacts[i]:
+            patient_zero.append(name)
+
+    return patient_zero
 
 # Function for section 6
 def find_potential_zombies(contacts_dic):

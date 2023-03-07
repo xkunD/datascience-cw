@@ -55,7 +55,7 @@ def find_patients_zero_set(contacts_dic):
 def find_patients_zero(contacts_dic):
     sorted_contacts = []
     patient_zero = []
-    
+
     # iterate over each value list in sorted order, and add its
     # contacts to the set of contacted contacts in a sorted manner
     for contacts in contacts_dic.values():
@@ -75,7 +75,7 @@ def find_patients_zero(contacts_dic):
         if i == len(sorted_contacts) or name < sorted_contacts[i]:
             patient_zero.append(name)
 
-    print(patient_zero)
+    return patient_zero
 
 
 
@@ -85,7 +85,8 @@ def main():
     #print(file_exists("sfadsf"))
     # print(parse_file("testfile.txt"))
     # pretty_print_section_4(parse_file("testfile.txt"))
-    find_patients_zero(parse_file("DataSet1.txt"))
+    print(find_patients_zero(parse_file("DataSet1.txt")))
+
 
 if __name__ == '__main__':
     main()
