@@ -70,8 +70,7 @@ def find_patients_zero(contacts_dic):
     patients = set(contacts_dic.keys())  # all patients as a set
     contacts = set().union(*contacts_dic.values())  # all contacts as a set
     patient_zero = list(patients - contacts)  # find the patient zeros
-    patient_zero.sort() # sort the list
-    return patient_zero
+    return sorted(patient_zero)
 
 # Function for section 6
 def find_potential_zombies(contacts_dic):
@@ -109,7 +108,10 @@ def find_not_zombie_nor_zero(contacts_dic, patients_zero_list, zombie_list):
         list: people who are neither a zombie nor a patient zero.
     """
     # Remove pass and fill in your code here
-    pass
+    all_names = set(contacts_dic.keys()).union(*contacts_dic.values())
+    not_zombie_nor_zero = list(all_names - set(patients_zero_list) - set(zombie_list))
+    not_zombie_nor_zero.sort()
+    return not_zombie_nor_zero
 
 # Function for section 8
 def find_most_viral(contacts_dic):
@@ -197,7 +199,8 @@ def pretty_print_section_6(potential_zombies_list):
     print("Potential Zombies:", format_list(potential_zombies_list))
 
 def pretty_print_section_7(not_zombie_or_patient_zero_list):
-    pass
+    print("Neither Patient Zero or Potential Zombie:", \
+          format_list(not_zombie_or_patient_zero_list))
 
 def pretty_print_section_8(most_viral_list):
     pass
