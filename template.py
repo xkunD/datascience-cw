@@ -204,7 +204,7 @@ def pretty_print_section_4(contact_dictionary):
         print(f"{sick_record} had contact with {format_list(contact_dictionary[sick_record])}")
 
 def pretty_print_section_5(patient_zero_list):
-    pass
+    print("Patient Zero(s):", format_list(patient_zero_list))
 
 def pretty_print_section_6(potential_zombies_list):
     pass

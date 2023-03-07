@@ -77,7 +77,8 @@ def find_patients_zero(contacts_dic):
 
     return patient_zero
 
-
+def pretty_print_section_5(patient_zero_list):
+    print("Patient Zero(s):", format_list(patient_zero_list))
 
 
 
@@ -85,7 +86,7 @@ def main():
     #print(file_exists("sfadsf"))
     # print(parse_file("testfile.txt"))
     # pretty_print_section_4(parse_file("testfile.txt"))
-    print(find_patients_zero(parse_file("DataSet1.txt")))
+    pretty_print_section_5(find_patients_zero(parse_file("DataSet1.txt")))
 
 
 if __name__ == '__main__':
