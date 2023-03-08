@@ -44,7 +44,7 @@ def parse_file(file_name):
         
 
 # Function for section 5
-def find_patients_zero_set(contacts_dic):
+def find_patients_zero(contacts_dic):
     """Return list of people who do not appear in any sick person's contact
     list. 
 
@@ -65,7 +65,7 @@ def find_patients_zero_set(contacts_dic):
 
 
 
-def find_patients_zero(contacts_dic):
+def find_patients_zero_looping(contacts_dic):
     sorted_contacts = []
     patient_zero = []
 
@@ -205,7 +205,6 @@ def pretty_print_section_10(heights_dictionary):
         print(f"  {name}: {distance}")
 
 def pretty_print_section_11(spreader_zombie_list):
-    print("\nFor additional credit:")
     print("  Spreader Zombies:", end = " ")
     if spreader_zombie_list:
         print(format_list(spreader_zombie_list))
@@ -217,7 +216,7 @@ def main():
     # print(file_exists("sfadsf"))
     # print(parse_file("testfile.txt"))
     # pretty_print_section_4(parse_file("testfile.txt"))
-    # pretty_print_section_5(find_patients_zero_set(parse_file("DataSet1.txt")))
+    # pretty_print_section_5(find_patients_zero(parse_file("DataSet1.txt")))
     dic = parse_file("DataSet2.txt")
     print(new_parse_file("DataSet1.txt"))
     # print(find_potential_zombies(parse_file("DataSet1.txt")))
@@ -232,7 +231,7 @@ def main():
         # Use the redirect_stdout context manager to capture the output of prettyprint
         with contextlib.redirect_stdout(file):
             pretty_print_section_4(dic)
-            pretty_print_section_5(find_patients_zero_set(dic))
+            pretty_print_section_5(find_patients_zero(dic))
             pretty_print_section_6(find_potential_zombies(dic))
             pretty_print_section_7(find_not_zombie_nor_zero(dic,find_patients_zero(dic), find_potential_zombies(dic)))                            
             pretty_print_section_8(find_most_viral(dic)) 

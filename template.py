@@ -255,7 +255,6 @@ def pretty_print_section_10(heights_dictionary):
 # Additional credit printing functions
 
 def pretty_print_section_11(spreader_zombie_list):
-    print("\nFor additional credit:")
     print("  Spreader Zombies:", end = " ")
     if spreader_zombie_list:
         print(format_list(spreader_zombie_list))
