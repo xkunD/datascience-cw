@@ -19,19 +19,19 @@ Most Viral People: Alice and Illersley
 Most Contacted: Lammle
 
 Heights:
-  Carol: 1
-  Kirk: 2
   Gordie: 3
-  Forbert Findlesworth II: 4
+  Darryl: 1
   Lammle: 0
-  Job: 1
+  Forbert Findlesworth II: 4
+  Molly: 3
   Bob: 1
-  Ettienne Fourth: 1
   Alice: 5
   Hanes: 5
-  Molly: 3
+  Carol: 1
+  Ettienne Fourth: 1
+  Job: 1
+  Kirk: 2
   Illersley: 5
-  Darryl: 1
 
 For additional credit:
   Spreader Zombies: Bob, Carol, Darryl, Ettienne Fourth and Job

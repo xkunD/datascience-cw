@@ -37,21 +37,20 @@ def parse_file(file_name):
     # Remove pass and fill in your code here
 
     contact_dict = {}
-    contacted_dict = {}
-    with open(file_name, 'r') as f:
-        for line in f:
+    with open(file_name, 'r') as file:
+        for line in file:
             line = line.strip()
             if line:
-                parts = line.split(',')
-                sick_person = parts[0]
-                contacts = sorted(parts[1:])
-                if sick_person not in contact_dict:
-                    contact_dict[sick_person] = []
-                contact_dict[sick_person].extend(contacts)
-    for person in sorted(contact_dict.keys()):
-        print(person)
-        contacted_dict[person] = sorted(list(set(contact_dict[person])))
-    return contacted_dict
+                try:
+                    sick_person, *contacts = line.strip().split(',')
+                    contact_dict[sick_person] = contacts
+                    # if not sick_person or not contacts:
+                    #     print("Error found in file, continuing.")
+                    # continue
+                except ValueError:
+                    print("Error found in file, continuing.")
+                    # continue
+    return contact_dict
 
 
 # Function for section 5
@@ -257,7 +256,11 @@ def pretty_print_section_10(heights_dictionary):
 
 def pretty_print_section_11(spreader_zombie_list):
     print("\nFor additional credit:")
-    print("  Spreader Zombies:", format_list(spreader_zombie_list))
+    print("  Spreader Zombies:", end = " ")
+    if spreader_zombie_list:
+        print(format_list(spreader_zombie_list))
+    else:
+        print("(None)")
 
 def pretty_print_section_12(regular_zombie_list):
     pass
