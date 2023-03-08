@@ -180,8 +180,8 @@ def find_spreader_zombies(contacts_dic, zombie_list):
 
 def pretty_print_section_4(contact_dictionary):
     print("Contact Records:")
-    for sick_record in contact_dictionary:
-        print(f"  {sick_record} had contact with {format_list(contact_dictionary[sick_record])}")
+    for sick_record in sorted(contact_dictionary):
+        print(f"  {sick_record} had contact with {format_list(sorted(contact_dictionary[sick_record]))}")
 
 def pretty_print_section_5(patient_zero_list):
     print("\nPatient Zero(s):", format_list(patient_zero_list))
@@ -218,7 +218,7 @@ def main():
     # print(parse_file("testfile.txt"))
     # pretty_print_section_4(parse_file("testfile.txt"))
     # pretty_print_section_5(find_patients_zero_set(parse_file("DataSet1.txt")))
-    dic = new_parse_file("DataSet2.txt")
+    dic = parse_file("DataSet2.txt")
     print(new_parse_file("DataSet1.txt"))
     # print(find_potential_zombies(parse_file("DataSet1.txt")))
     # pretty_print_section_7(find_not_zombie_nor_zero(dic,find_patients_zero(dic),find_potential_zombies(dic)))
@@ -238,7 +238,7 @@ def main():
             pretty_print_section_8(find_most_viral(dic)) 
             pretty_print_section_9(find_most_contacted(dic)) 
             pretty_print_section_10(find_maximum_distance_from_zombie(dic, zombie_list))   
-            pretty_print_section_11(find_spreader_zombies(dic, zombie_list))                        
+            pretty_print_section_11([])                        
             
 
 if __name__ == '__main__':

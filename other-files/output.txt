@@ -14,24 +14,24 @@ Contact Records:
 
 Patient Zero(s): Alice, Hanes and Illersley
 Potential Zombies: Lammle
-Neither Patient Zero or Potential Zombie: Bob, Carol, Darryl, Ettienne Fourth, Forbert Findlesworth II, Gordie, Job, Kirk and Molly
+Neither Patient Zero or Potential Zombie: Job, Kirk and Molly
 Most Viral People: Alice and Illersley
 Most Contacted: Lammle
 
 Heights:
-  Gordie: 3
-  Darryl: 1
-  Lammle: 0
   Forbert Findlesworth II: 4
-  Molly: 3
-  Bob: 1
-  Alice: 5
-  Hanes: 5
   Carol: 1
-  Ettienne Fourth: 1
-  Job: 1
   Kirk: 2
+  Darryl: 1
+  Ettienne Fourth: 1
+  Hanes: 5
+  Bob: 1
+  Lammle: 0
+  Gordie: 3
+  Alice: 5
+  Molly: 3
   Illersley: 5
+  Job: 1
 
 For additional credit:
-  Spreader Zombies: Bob, Carol, Darryl, Ettienne Fourth and Job
+  Spreader Zombies: (None)

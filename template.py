@@ -228,8 +228,8 @@ def pretty_print_section_3():
 
 def pretty_print_section_4(contact_dictionary):
     print("Contact Records:")
-    for sick_record in contact_dictionary:
-        print(f"  {sick_record} had contact with {format_list(contact_dictionary[sick_record])}")
+    for sick_record in sorted(contact_dictionary):
+        print(f"  {sick_record} had contact with {format_list(sorted(contact_dictionary[sick_record]))}")
 
 def pretty_print_section_5(patient_zero_list):
     print("\nPatient Zero(s):", format_list(patient_zero_list))
