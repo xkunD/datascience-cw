@@ -198,7 +198,16 @@ def find_maximum_distance_from_zombie(contacts_dic, zombie_list):
 
 def find_spreader_zombies(contacts_dic, zombie_list):
     # Remove pass and fill in your code here
-    pass
+    patients_set = set(contacts_dic.keys())
+    spreader_zombies_list = []
+    for patient in contacts_dic.keys():
+        is_spreader = True
+        for contact in contacts_dic[patient]:
+            if contact in patients_set:
+                is_spreader = False
+        if is_spreader:
+            spreader_zombies_list.append(patient)
+    return spreader_zombies_list
 
 def find_regular_zombies(contacts_dic, zombie_list):
     # Remove pass and fill in your code here
@@ -220,7 +229,7 @@ def pretty_print_section_3():
 def pretty_print_section_4(contact_dictionary):
     print("Contact Records:")
     for sick_record in contact_dictionary:
-        print(f"{sick_record} had contact with {format_list(contact_dictionary[sick_record])}")
+        print(f"  {sick_record} had contact with {format_list(contact_dictionary[sick_record])}")
 
 def pretty_print_section_5(patient_zero_list):
     print("Patient Zero(s):", format_list(patient_zero_list))
