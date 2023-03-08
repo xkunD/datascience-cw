@@ -176,7 +176,7 @@ def pretty_print_section_8(most_viral_list):
     print("Most Viral People:", format_list(most_viral_list))
 
 def pretty_print_section_9(most_contacted_list):
-    print("Most contacted:", format_list(most_contacted_list))
+    print("Most Contacted:", format_list(most_contacted_list))
 
 def pretty_print_section_10(heights_dictionary):
     print("\nHeights:")
@@ -206,7 +206,8 @@ def main():
             pretty_print_section_5(find_patients_zero_set(dic))
             pretty_print_section_7(find_not_zombie_nor_zero(dic,find_patients_zero(dic), find_potential_zombies(dic)))                            
             pretty_print_section_8(find_most_viral(dic)) 
-            pretty_print_section_9(find_most_contacted(dic))                            
+            pretty_print_section_9(find_most_contacted(dic)) 
+            pretty_print_section_10(find_maximum_distance_from_zombie(dic, zombie_list))                           
 
 if __name__ == '__main__':
     main()

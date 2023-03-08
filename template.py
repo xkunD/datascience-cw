@@ -245,7 +245,7 @@ def pretty_print_section_8(most_viral_list):
     print("Most Viral People:", format_list(most_viral_list))
 
 def pretty_print_section_9(most_contacted_list):
-    print("Most contacted:", format_list(most_contacted_list))
+    print("Most Contacted:", format_list(most_contacted_list))
 
 def pretty_print_section_10(heights_dictionary):
     print("\nHeights:")

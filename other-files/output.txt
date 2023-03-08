@@ -8,6 +8,21 @@ Contact Records:
   Paul had contact with Zach
   Will had contact with Leanne and Mark
   Zach had contact with Philip
+
 Patient Zero(s): Bob, Farley and Larry
 Neither Patient Zero or Potential Zombie: Carol, Leanne, Mark, Paul, Will and Zach
 Most Viral People: Bob
+Most Contacted: Leanne and Mark
+
+Heights:
+  Paul: 2
+  Zach: 1
+  Carol: 3
+  Farley: 3
+  Larry: 4
+  Mark: 2
+  Bob: 4
+  Philip: 0
+  Sarai: 0
+  Leanne: 1
+  Will: 3
