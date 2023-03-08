@@ -166,7 +166,7 @@ def pretty_print_section_4(contact_dictionary):
         print(f"  {sick_record} had contact with {format_list(contact_dictionary[sick_record])}")
 
 def pretty_print_section_5(patient_zero_list):
-    print("Patient Zero(s):", format_list(patient_zero_list))
+    print("\nPatient Zero(s):", format_list(patient_zero_list))
 
 def pretty_print_section_7(not_zombie_or_patient_zero_list):
     print("Neither Patient Zero or Potential Zombie:", \
@@ -179,7 +179,7 @@ def pretty_print_section_9(most_contacted_list):
     print("Most contacted:", format_list(most_contacted_list))
 
 def pretty_print_section_10(heights_dictionary):
-    print("Heights:")
+    print("\nHeights:")
     for name, distance in heights_dictionary.items():
         print(f"  {name}: {distance}")
 
@@ -205,7 +205,8 @@ def main():
             pretty_print_section_4(parse_file("DataSet1.txt"))
             pretty_print_section_5(find_patients_zero_set(dic))
             pretty_print_section_7(find_not_zombie_nor_zero(dic,find_patients_zero(dic), find_potential_zombies(dic)))                            
-            pretty_print_section_8(find_most_viral(dic))                             
+            pretty_print_section_8(find_most_viral(dic)) 
+            pretty_print_section_9(find_most_contacted(dic))                            
 
 if __name__ == '__main__':
     main()

@@ -232,7 +232,7 @@ def pretty_print_section_4(contact_dictionary):
         print(f"  {sick_record} had contact with {format_list(contact_dictionary[sick_record])}")
 
 def pretty_print_section_5(patient_zero_list):
-    print("Patient Zero(s):", format_list(patient_zero_list))
+    print("\nPatient Zero(s):", format_list(patient_zero_list))
 
 def pretty_print_section_6(potential_zombies_list):
     print("Potential Zombies:", format_list(potential_zombies_list))
@@ -248,7 +248,7 @@ def pretty_print_section_9(most_contacted_list):
     print("Most contacted:", format_list(most_contacted_list))
 
 def pretty_print_section_10(heights_dictionary):
-    print("Heights:")
+    print("\nHeights:")
     for name, distance in heights_dictionary.items():
         print(f"  {name}: {distance}")
 
