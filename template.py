@@ -37,20 +37,21 @@ def parse_file(file_name):
     # Remove pass and fill in your code here
 
     contact_dict = {}
-    with open(file_name, 'r') as file:
-        for line in file:
+    contacted_dict = {}
+    with open(file_name, 'r') as f:
+        for line in f:
             line = line.strip()
             if line:
-                try:
-                    sick_person, *contacts = line.strip().split(',')
-                    contact_dict[sick_person] = contacts
-                    # if not sick_person or not contacts:
-                    #     print("Error found in file, continuing.")
-                    # continue
-                except ValueError:
-                    print("Error found in file, continuing.")
-                    # continue
-    return contact_dict
+                parts = line.split(',')
+                sick_person = parts[0]
+                contacts = sorted(parts[1:])
+                if sick_person not in contact_dict:
+                    contact_dict[sick_person] = []
+                contact_dict[sick_person].extend(contacts)
+    for person in sorted(contact_dict.keys()):
+        print(person)
+        contacted_dict[person] = sorted(list(set(contact_dict[person])))
+    return contacted_dict
 
 
 # Function for section 5
@@ -224,7 +225,7 @@ def find_cycles_in_data(contacts_dic):
 # must output a string as specified by contact_tracing.pdf 
 
 def pretty_print_section_3():
-    pass
+    print("Error found in file, continuing.")
 
 def pretty_print_section_4(contact_dictionary):
     print("Contact Records:")
@@ -255,7 +256,8 @@ def pretty_print_section_10(heights_dictionary):
 # Additional credit printing functions
 
 def pretty_print_section_11(spreader_zombie_list):
-    pass
+    print("\nFor additional credit:")
+    print("  Spreader Zombies:", format_list(spreader_zombie_list))
 
 def pretty_print_section_12(regular_zombie_list):
     pass

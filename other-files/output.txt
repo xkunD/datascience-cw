@@ -1,28 +1,37 @@
 Contact Records:
-  Bob had contact with Carol, Leanne, Mark, Paul and Will
-  Carol had contact with Leanne and Mark
-  Farley had contact with Paul
-  Leanne had contact with Sarai
-  Larry had contact with Carol, Leanne, Mark and Will
-  Mark had contact with Philip and Zach
-  Paul had contact with Zach
-  Will had contact with Leanne and Mark
-  Zach had contact with Philip
+  Alice had contact with Bob, Carol, Darryl, Ettienne Fourth, Forbert Findlesworth II and Gordie
+  Bob had contact with Lammle
+  Carol had contact with Lammle
+  Darryl had contact with Lammle
+  Ettienne Fourth had contact with Lammle
+  Forbert Findlesworth II had contact with Job and Molly
+  Gordie had contact with Kirk
+  Hanes had contact with Bob, Carol, Ettienne Fourth and Forbert Findlesworth II
+  Illersley had contact with Darryl, Ettienne Fourth, Forbert Findlesworth II, Gordie, Job and Kirk
+  Job had contact with Lammle
+  Kirk had contact with Job
+  Molly had contact with Job and Kirk
 
-Patient Zero(s): Bob, Farley and Larry
-Neither Patient Zero or Potential Zombie: Carol, Leanne, Mark, Paul, Will and Zach
-Most Viral People: Bob
-Most Contacted: Leanne and Mark
+Patient Zero(s): Alice, Hanes and Illersley
+Potential Zombies: Lammle
+Neither Patient Zero or Potential Zombie: Bob, Carol, Darryl, Ettienne Fourth, Forbert Findlesworth II, Gordie, Job, Kirk and Molly
+Most Viral People: Alice and Illersley
+Most Contacted: Lammle
 
 Heights:
-  Paul: 2
-  Zach: 1
-  Carol: 3
-  Farley: 3
-  Larry: 4
-  Mark: 2
-  Bob: 4
-  Philip: 0
-  Sarai: 0
-  Leanne: 1
-  Will: 3
+  Carol: 1
+  Kirk: 2
+  Gordie: 3
+  Forbert Findlesworth II: 4
+  Lammle: 0
+  Job: 1
+  Bob: 1
+  Ettienne Fourth: 1
+  Alice: 5
+  Hanes: 5
+  Molly: 3
+  Illersley: 5
+  Darryl: 1
+
+For additional credit:
+  Spreader Zombies: Bob, Carol, Darryl, Ettienne Fourth and Job

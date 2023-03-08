@@ -6,6 +6,23 @@ import contextlib
 def file_exists(file_name):
     return os.path.isfile(file_name)
 
+def new_parse_file(file_name):
+    contact_dict = {}
+    contacted_dict = {}
+    with open(file_name, 'r') as f:
+        for line in f:
+            line = line.strip()
+            if line:
+                parts = line.split(',')
+                sick_person = parts[0]
+                contacts = sorted(parts[1:])
+                if sick_person not in contact_dict:
+                    contact_dict[sick_person] = []
+                contact_dict[sick_person].extend(contacts)
+    for person in sorted(contact_dict.keys()):
+        print(person)
+        contacted_dict[person] = sorted(list(set(contact_dict[person])))
+    return contacted_dict
 
 def parse_file(file_name):
 
@@ -45,6 +62,7 @@ def find_patients_zero_set(contacts_dic):
     patient_zero = list(patients - contacts)  # find the missing contacts
     patient_zero.sort()
     return patient_zero
+
 
 
 def find_patients_zero(contacts_dic):
@@ -168,6 +186,9 @@ def pretty_print_section_4(contact_dictionary):
 def pretty_print_section_5(patient_zero_list):
     print("\nPatient Zero(s):", format_list(patient_zero_list))
 
+def pretty_print_section_6(potential_zombies_list):
+    print("Potential Zombies:", format_list(potential_zombies_list))
+
 def pretty_print_section_7(not_zombie_or_patient_zero_list):
     print("Neither Patient Zero or Potential Zombie:", \
           format_list(not_zombie_or_patient_zero_list))
@@ -183,31 +204,38 @@ def pretty_print_section_10(heights_dictionary):
     for name, distance in heights_dictionary.items():
         print(f"  {name}: {distance}")
 
+def pretty_print_section_11(spreader_zombie_list):
+    print("\nFor additional credit:")
+    print("  Spreader Zombies:", format_list(spreader_zombie_list))
 
 def main():
     
-    #print(file_exists("sfadsf"))
+    # print(file_exists("sfadsf"))
     # print(parse_file("testfile.txt"))
-    pretty_print_section_4(parse_file("testfile.txt"))
-    pretty_print_section_5(find_patients_zero_set(parse_file("DataSet1.txt")))
-    dic = parse_file("DataSet1.txt")
+    # pretty_print_section_4(parse_file("testfile.txt"))
+    # pretty_print_section_5(find_patients_zero_set(parse_file("DataSet1.txt")))
+    dic = new_parse_file("DataSet2.txt")
+    print(new_parse_file("DataSet1.txt"))
     # print(find_potential_zombies(parse_file("DataSet1.txt")))
     # pretty_print_section_7(find_not_zombie_nor_zero(dic,find_patients_zero(dic),find_potential_zombies(dic)))
     # pretty_print_section_8(find_most_viral(dic))
     # pretty_print_section_9(find_most_contacted(dic))
     zombie_list = find_potential_zombies(dic)
     # pretty_print_section_10(find_maximum_distance_from_zombie(dic, zombie_list))
-    print(find_spreader_zombies(dic, zombie_list))
+    # print(find_spreader_zombies(dic, zombie_list))
 
     with open('output.txt', 'w') as file:
         # Use the redirect_stdout context manager to capture the output of prettyprint
         with contextlib.redirect_stdout(file):
-            pretty_print_section_4(parse_file("DataSet1.txt"))
+            pretty_print_section_4(dic)
             pretty_print_section_5(find_patients_zero_set(dic))
+            pretty_print_section_6(find_potential_zombies(dic))
             pretty_print_section_7(find_not_zombie_nor_zero(dic,find_patients_zero(dic), find_potential_zombies(dic)))                            
             pretty_print_section_8(find_most_viral(dic)) 
             pretty_print_section_9(find_most_contacted(dic)) 
-            pretty_print_section_10(find_maximum_distance_from_zombie(dic, zombie_list))                           
+            pretty_print_section_10(find_maximum_distance_from_zombie(dic, zombie_list))   
+            pretty_print_section_11(find_spreader_zombies(dic, zombie_list))                        
+            
 
 if __name__ == '__main__':
     main()
