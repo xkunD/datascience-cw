@@ -121,6 +121,48 @@ def find_most_viral(contacts_dic):
     most_viral.sort()
     return most_viral
 
+def find_most_contacted(contacts_dic):
+    contact_count = {}
+    for contact_list in contacts_dic.values():
+        for contact in contact_list:
+            if contact in contact_count:
+                contact_count[contact] += 1
+            else:
+                contact_count[contact] = 1
+    
+    # Find the contacts with the highest count
+    max_count = max(contact_count.values())
+    most_contacted = [contact for contact, count in contact_count.items() if count == max_count]
+    most_contacted.sort()
+    return most_contacted
+
+# section 10
+# note that zombie_list means potential zombies, who is not patient 
+def find_maximum_distance_from_zombie(contacts_dic, zombie_list):
+    # create dictionary and set distances of all people to 0
+    patient_list = contacts_dic.keys()
+    heights_dic = dict.fromkeys(patient_list | zombie_list, 0)
+    changed = True
+    while changed:
+        changed = False
+        for patient in contacts_dic.keys():
+            for contact in contacts_dic[patient]:
+                if heights_dic[patient] <= heights_dic[contact]:
+                    heights_dic[patient] = heights_dic[contact] + 1
+                    changed = True
+    return heights_dic
+
+# section 11
+"""
+def find_spreader_zombies(contacts_dic, zombie_list):
+    patients_set = set(contacts_dic.keys())
+    spreader_zombies_
+    for patient in contacts_dic.keys():
+        for contact in contacts_dic[patient]:
+
+            
+"""
+
 
 def pretty_print_section_7(not_zombie_or_patient_zero_list):
     print("Neither Patient Zero or Potential Zombie:", \
@@ -128,6 +170,14 @@ def pretty_print_section_7(not_zombie_or_patient_zero_list):
     
 def pretty_print_section_8(most_viral_list):
     print("Most Viral People:", format_list(most_viral_list))
+
+def pretty_print_section_9(most_contacted_list):
+    print("Most contacted:", format_list(most_contacted_list))
+
+def pretty_print_section_10(heights_dictionary):
+    print("Heights:")
+    for name, distance in heights_dictionary.items():
+        print(f"  {name}: {distance}")
 
 
 def main():
@@ -138,6 +188,9 @@ def main():
     dic = parse_file("DataSet1.txt")
     # print(find_potential_zombies(parse_file("DataSet1.txt")))
     # pretty_print_section_7(find_not_zombie_nor_zero(dic,find_patients_zero(dic),find_potential_zombies(dic)))
-    pretty_print_section_8(find_most_viral(dic))
+    # pretty_print_section_8(find_most_viral(dic))
+    # pretty_print_section_9(find_most_contacted(dic))
+    zombie_list = find_potential_zombies(dic)
+    pretty_print_section_10(find_maximum_distance_from_zombie(dic, zombie_list))
 if __name__ == '__main__':
     main()

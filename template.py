@@ -152,8 +152,18 @@ def find_most_contacted(contacts_dic):
         list: contains the names of contacts who appear in the most sick
         persons' contact list.
     """
-    # Remove pass and fill in your code here
-    pass
+    contact_count = {}
+    for contact_list in contacts_dic.values():
+        for name in contact_list:
+            if name in contact_count:
+                contact_count[name] += 1
+            else:
+                contact_count[name] = 1
+    
+    max_count = max(contact_count.values())
+    most_contacted = [contact for contact, count in contact_count.items() if count == max_count]
+    most_contacted.sort()
+    return most_contacted
     
 # Function for section 10
 def find_maximum_distance_from_zombie(contacts_dic, zombie_list):
@@ -170,8 +180,18 @@ def find_maximum_distance_from_zombie(contacts_dic, zombie_list):
     Returns:
         dic: contains heights (maximum distance) of person from a zombie
     """
-    # Remove pass and fill in your code here
-    pass
+    # create dictionary and set distances of all people to 0
+    patient_list = contacts_dic.keys()
+    heights_dic = dict.fromkeys(patient_list | zombie_list, 0)
+    changed = True
+    while changed:
+        changed = False
+        for patient in contacts_dic.keys():
+            for contact in contacts_dic[patient]:
+                if heights_dic[patient] <= heights_dic[contact]:
+                    heights_dic[patient] = heights_dic[contact] + 1
+                    changed = True
+    return heights_dic
 
 
 # "Additional Credit" Functions here
@@ -216,10 +236,12 @@ def pretty_print_section_8(most_viral_list):
     print("Most Viral People:", format_list(most_viral_list))
 
 def pretty_print_section_9(most_contacted_list):
-    pass
+    print("Most contacted:", format_list(most_contacted_list))
 
 def pretty_print_section_10(heights_dictionary):
-    pass
+    print("Heights:")
+    for name, distance in heights_dictionary.items():
+        print(f"  {name}: {distance}")
 
 # Additional credit printing functions
 
