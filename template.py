@@ -238,7 +238,29 @@ def find_predator_zombies(contacts_dic, zombie_list):
 
 
 def find_cycles_in_data(contacts_dic):
-    pass    # Replace this return statement with your cycle detector when ready
+    visited = set()
+    stack = set()
+
+    # Check for cycles in each node
+    for node in contacts_dic:
+        if node not in visited:
+            visited.add(node)
+            stack.add(node)
+
+            # DFS on the node
+            while stack:
+                current_node = stack.pop()
+                for neighbor in contacts_dic.get(current_node, []):
+                    if neighbor not in visited:
+                        visited.add(neighbor)
+                        stack.add(neighbor)
+                    elif neighbor in stack:
+                        return True
+
+            # Remove nodes from stack after DFS
+            stack.clear()
+
+    return False
 
 # Pretty printing functions. You have one function per section that
 # must output a string as specified by contact_tracing.pdf 
@@ -296,7 +318,7 @@ def pretty_print_section_13(zombie_predator_list):
         print("(None)")
 
 def pretty_print_section_14(cycles_state):
-    pass
+    print(cycles_state)
     
 # =======================================================
 # =======================================================

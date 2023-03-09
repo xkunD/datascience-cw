@@ -1,0 +1,9 @@
+Linda,Xavier,Ursula
+Victor,Zoe,Mike,Nancy
+Zoe,Tina
+Xavier,Zoe,Nancy
+Karl,Linda,Mike
+Mike,Victor,Karl
+Tina,Judy,Karl,Ursula
+Nancy,Linda,Xavier,Mike
+Ursula,Victor
