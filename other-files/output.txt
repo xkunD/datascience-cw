@@ -1,35 +1,49 @@
 Contact Records:
-  Alice had contact with Bob, Carol, Darryl, Ettienne Fourth, Forbert Findlesworth II and Gordie
-  Bob had contact with Lammle
-  Carol had contact with Lammle
-  Darryl had contact with Lammle
-  Ettienne Fourth had contact with Lammle
-  Forbert Findlesworth II had contact with Job and Molly
-  Gordie had contact with Kirk
-  Hanes had contact with Bob, Carol, Ettienne Fourth and Forbert Findlesworth II
-  Illersley had contact with Darryl, Ettienne Fourth, Forbert Findlesworth II, Gordie, Job and Kirk
-  Job had contact with Lammle
-  Kirk had contact with Job
-  Molly had contact with Job and Kirk
+  Bob had contact with Carol, Leanne, Mark, Paul and Will
+  Carol had contact with Leanne and Mark
+  Farley had contact with Paul
+  Larry had contact with Carol, Leanne, Mark and Will
+  Leanne had contact with Sarai
+  Mark had contact with Philip and Zach
+  Paul had contact with Zach
+  Will had contact with Leanne and Mark
+  Zach had contact with Philip
 
-Patient Zero(s): Alice, Hanes and Illersley
-Potential Zombies: Lammle
-Neither Patient Zero or Potential Zombie: Bob, Carol, Darryl, Ettienne Fourth, Forbert Findlesworth II, Gordie, Job, Kirk and Molly
-Most Viral People: Alice and Illersley
-Most Contacted: Lammle
+Patient Zero(s): Bob, Farley and Larry
+Potential Zombies: Philip and Sarai
+Neither Patient Zero or Potential Zombie: Carol, Leanne, Mark, Paul, Will and Zach
+Most Viral People: Bob
+Most Contacted: Leanne and Mark
 
 Heights:
-  Job: 1
-  Alice: 5
-  Lammle: 0
-  Illersley: 5
-  Bob: 1
-  Forbert Findlesworth II: 4
-  Carol: 1
-  Ettienne Fourth: 1
-  Darryl: 1
-  Hanes: 5
-  Kirk: 2
-  Gordie: 3
-  Molly: 3
-  Spreader Zombies: (None)
+  Larry: 4
+  Mark: 2
+  Sarai: 0
+  Farley: 3
+  Leanne: 1
+  Paul: 2
+  Philip: 0
+  Carol: 3
+  Bob: 4
+  Zach: 1
+  Will: 3
+  Spreader Zombies: Leanne and Zach
+Bob have contact patient: True
+Bob have contact zombie: False
+Carol have contact patient: True
+Carol have contact zombie: False
+Farley have contact patient: True
+Farley have contact zombie: False
+Leanne have contact patient: False
+Leanne have contact zombie: True
+Larry have contact patient: True
+Larry have contact zombie: False
+Mark have contact patient: True
+Mark have contact zombie: True
+Paul have contact patient: True
+Paul have contact zombie: False
+Will have contact patient: True
+Will have contact zombie: False
+Zach have contact patient: False
+Zach have contact zombie: True
+['Mark']

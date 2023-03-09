@@ -198,20 +198,34 @@ def find_maximum_distance_from_zombie(contacts_dic, zombie_list):
 
 def find_spreader_zombies(contacts_dic, zombie_list):
     # Remove pass and fill in your code here
-    patients_set = set(contacts_dic.keys())
     spreader_zombies_list = []
     for patient in contacts_dic.keys():
         is_spreader = True
         for contact in contacts_dic[patient]:
-            if contact in patients_set:
-                is_spreader = False
+            if contact not in zombie_list:
+                is_spreader = False # while loop instead of for?
         if is_spreader:
             spreader_zombies_list.append(patient)
     return spreader_zombies_list
 
 def find_regular_zombies(contacts_dic, zombie_list):
-    # Remove pass and fill in your code here
-    pass
+    regular_zombies_list = []
+    patient_list = contacts_dic.keys()
+    for patient in patient_list:
+        index = 0
+        contact_with_patient = contact_with_zombie = False
+        contact_list = contacts_dic[patient]
+        while (not contact_with_patient or not contact_with_zombie)\
+              and index < len(contact_list):
+            if contact_list[index] in patient_list:
+                contact_with_patient = True
+            elif contact_list[index] in zombie_list:
+                contact_with_zombie = True
+            index += 1
+        if contact_with_zombie and contact_with_patient:
+            regular_zombies_list.append(patient)
+    return regular_zombies_list
+
 
 def find_predator_zombies(contacts_dic, zombie_list):
     # Remove pass and fill in your code here
@@ -262,7 +276,11 @@ def pretty_print_section_11(spreader_zombie_list):
         print("(None)")
 
 def pretty_print_section_12(regular_zombie_list):
-    pass
+    print("  Regular Zombies:", end = " ")
+    if regular_zombie_list:
+        print(format_list(regular_zombie_list))
+    else:
+        print("(None)")
 
 def pretty_print_section_13(zombie_predator_list):
     pass

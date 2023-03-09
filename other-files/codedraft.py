@@ -166,17 +166,44 @@ def find_maximum_distance_from_zombie(contacts_dic, zombie_list):
 # section 11
 
 def find_spreader_zombies(contacts_dic, zombie_list):
-    patients_set = set(contacts_dic.keys())
     spreader_zombies_list = []
     for patient in contacts_dic.keys():
         is_spreader = True
         for contact in contacts_dic[patient]:
-            if contact in patients_set:
+            if contact not in zombie_list:
                 is_spreader = False
         if is_spreader:
             spreader_zombies_list.append(patient)
     return spreader_zombies_list
-                
+
+# sec 12                
+def find_regular_zombies(contacts_dic, zombie_list):
+    regular_zombies_list = []
+    patient_list = contacts_dic.keys()
+    for patient in patient_list:
+        index = 0
+        contact_with_patient = contact_with_zombie = False
+        contact_list = contacts_dic[patient]
+        while (not contact_with_patient or not contact_with_zombie)\
+              and index < len(contact_list):
+            if contact_list[index] in patient_list:
+                contact_with_patient = True
+            elif contact_list[index] in zombie_list:
+                contact_with_zombie = True
+            index += 1
+        if contact_with_zombie and contact_with_patient:
+            regular_zombies_list.append(patient)
+    return regular_zombies_list
+
+def find_predator_zombies(contacts_dic, zombie_list):
+    # 一种是出现在了contact list里面但不是病人，也就是potential zombie；
+    # 另一种是病人，但接触的所有人也都是病人（即没接触not in zombie list的人）
+    predator_zombies_list = list(zombie_list)
+    patient_list = contacts_dic.keys()
+    for patient in patient_list:
+
+
+
 
 def pretty_print_section_4(contact_dictionary):
     print("Contact Records:")
@@ -211,13 +238,20 @@ def pretty_print_section_11(spreader_zombie_list):
     else:
         print("(None)")
 
+def pretty_print_section_12(regular_zombie_list):
+    print("  Regular Zombies:", end = " ")
+    if regular_zombie_list:
+        print(format_list(regular_zombie_list))
+    else:
+        print("(None)")
+
 def main():
     
     # print(file_exists("sfadsf"))
     # print(parse_file("testfile.txt"))
     # pretty_print_section_4(parse_file("testfile.txt"))
     # pretty_print_section_5(find_patients_zero(parse_file("DataSet1.txt")))
-    dic = parse_file("DataSet2.txt")
+    dic = parse_file("DataSet1.txt")
     print(new_parse_file("DataSet1.txt"))
     # print(find_potential_zombies(parse_file("DataSet1.txt")))
     # pretty_print_section_7(find_not_zombie_nor_zero(dic,find_patients_zero(dic),find_potential_zombies(dic)))
@@ -237,7 +271,8 @@ def main():
             pretty_print_section_8(find_most_viral(dic)) 
             pretty_print_section_9(find_most_contacted(dic)) 
             pretty_print_section_10(find_maximum_distance_from_zombie(dic, zombie_list))   
-            pretty_print_section_11([])                        
+            pretty_print_section_11(find_spreader_zombies(dic, zombie_list))  
+            print(find_regular_zombies(dic, zombie_list))                      
             
 
 if __name__ == '__main__':
