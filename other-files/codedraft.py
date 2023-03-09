@@ -205,6 +205,33 @@ def find_predator_zombies(contacts_dic, zombie_list):
             predator_zombies_list.append(patient)
     return predator_zombies_list
 
+def find_cycles_in_data(contacts_dic):
+    # Initialize visited and stack lists
+    visited = set()
+    stack = set()
+
+    # Check for cycles in each node
+    for node in contacts_dic:
+        if node not in visited:
+            visited.add(node)
+            stack.add(node)
+
+            # DFS on the node
+            while stack:
+                current_node = stack.pop()
+                for neighbor in contacts_dic.get(current_node, []):
+                    if neighbor not in visited:
+                        visited.add(neighbor)
+                        stack.add(neighbor)
+                    elif neighbor in stack:
+                        return True
+
+            # Remove nodes from stack after DFS
+            stack.clear()
+
+    return False
+
+
 
 
 def pretty_print_section_4(contact_dictionary):
@@ -282,7 +309,8 @@ def main():
             pretty_print_section_10(find_maximum_distance_from_zombie(dic, zombie_list))   
             pretty_print_section_11(find_spreader_zombies(dic, zombie_list))  
             pretty_print_section_12(find_regular_zombies(dic, zombie_list))
-            pretty_print_section_13(find_predator_zombies(dic, zombie_list))                     
+            pretty_print_section_13(find_predator_zombies(dic, zombie_list))    
+            print(find_cycles_in_data(parse_file('DataSetCycle1.txt')))                 
             
 
 if __name__ == '__main__':
