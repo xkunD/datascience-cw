@@ -196,12 +196,14 @@ def find_regular_zombies(contacts_dic, zombie_list):
     return regular_zombies_list
 
 def find_predator_zombies(contacts_dic, zombie_list):
-    # 一种是出现在了contact list里面但不是病人，也就是potential zombie；
+    # 一种是出现在了contact list里面但不是病人，也就是potential zombie；  - 不考虑了
     # 另一种是病人，但接触的所有人也都是病人（即没接触not in zombie list的人）
-    predator_zombies_list = list(zombie_list)
+    predator_zombies_list = []
     patient_list = contacts_dic.keys()
     for patient in patient_list:
-
+        if all(contact in patient_list for contact in contacts_dic[patient]):
+            predator_zombies_list.append(patient)
+    return predator_zombies_list
 
 
 
@@ -245,6 +247,13 @@ def pretty_print_section_12(regular_zombie_list):
     else:
         print("(None)")
 
+def pretty_print_section_13(zombie_predator_list):
+    print("  Zombie Predators:", end = " ")
+    if zombie_predator_list:
+        print(format_list(zombie_predator_list))
+    else:
+        print("(None)")
+
 def main():
     
     # print(file_exists("sfadsf"))
@@ -272,7 +281,8 @@ def main():
             pretty_print_section_9(find_most_contacted(dic)) 
             pretty_print_section_10(find_maximum_distance_from_zombie(dic, zombie_list))   
             pretty_print_section_11(find_spreader_zombies(dic, zombie_list))  
-            print(find_regular_zombies(dic, zombie_list))                      
+            pretty_print_section_12(find_regular_zombies(dic, zombie_list))
+            pretty_print_section_13(find_predator_zombies(dic, zombie_list))                     
             
 
 if __name__ == '__main__':

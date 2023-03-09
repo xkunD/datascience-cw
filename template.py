@@ -197,7 +197,7 @@ def find_maximum_distance_from_zombie(contacts_dic, zombie_list):
 # "Additional Credit" Functions here
 
 def find_spreader_zombies(contacts_dic, zombie_list):
-    # Remove pass and fill in your code here
+    # spreader: only contact with potential zombie (so all contact in zombie list)
     spreader_zombies_list = []
     for patient in contacts_dic.keys():
         is_spreader = True
@@ -228,8 +228,14 @@ def find_regular_zombies(contacts_dic, zombie_list):
 
 
 def find_predator_zombies(contacts_dic, zombie_list):
-    # Remove pass and fill in your code here
-    pass
+    # predator: all contacts are patients
+    predator_zombies_list = []
+    patient_list = contacts_dic.keys()
+    for patient in patient_list:
+        if all(contact in patient_list for contact in contacts_dic[patient]):
+            predator_zombies_list.append(patient)
+    return predator_zombies_list
+
 
 def find_cycles_in_data(contacts_dic):
     pass    # Replace this return statement with your cycle detector when ready
@@ -283,7 +289,11 @@ def pretty_print_section_12(regular_zombie_list):
         print("(None)")
 
 def pretty_print_section_13(zombie_predator_list):
-    pass
+    print("  Zombie Predators:", end = " ")
+    if zombie_predator_list:
+        print(format_list(zombie_predator_list))
+    else:
+        print("(None)")
 
 def pretty_print_section_14(cycles_state):
     pass
