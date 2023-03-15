@@ -205,8 +205,8 @@ def find_predator_zombies(contacts_dic, zombie_list):
     # 另一种是病人，但接触的所有人也都是病人（即没接触not in zombie list的人）
     predator_zombies_list = []
     patient_list = contacts_dic.keys()
-    for patient in patient_list:
-        if all(contact in patient_list for contact in contacts_dic[patient]):
+    for patient, contacts_list in contacts_dic.items():
+        if all(contact in patient_list for contact in contacts_list):
             predator_zombies_list.append(patient)
     return predator_zombies_list
 

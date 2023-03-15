@@ -238,13 +238,13 @@ def find_regular_zombies(contacts_dic, zombie_list):
         zombie_list (list): all zombies
 
     Returns:
-        list: contains the names of sick people who contacted with both potential zombies and people who are already sick.
+        list: contains the names of sick people who contacted with both potential zombies and other sick people.
     """
     regular_zombies_list = []
-    patient_list = contacts_dic.keys()
+    patients_list = contacts_dic.keys()
 
     for patient, contacts in contacts_dic.items():
-        contact_with_patient = set(patient_list).intersection(contacts)
+        contact_with_patient = set(patients_list).intersection(contacts)
         contact_with_zombie = set(zombie_list).intersection(contacts)
 
         if contact_with_patient and contact_with_zombie:
@@ -267,8 +267,8 @@ def find_predator_zombies(contacts_dic, zombie_list):
     # predator: all contacts are patients
     predator_zombies_list = []
     patient_list = contacts_dic.keys()
-    for patient in patient_list:
-        if all(contact in patient_list for contact in contacts_dic[patient]):
+    for patient, contacts_list in contacts_dic.items():
+        if all(contact in patient_list for contact in contacts_list):
             predator_zombies_list.append(patient)
     return predator_zombies_list
 
@@ -284,6 +284,7 @@ def depth_first_search(patient, visited, stack, contacts_dic):
             return True
     stack.remove(patient)
     return False 
+
 
 def find_cycles_in_data(contacts_dic):
     visited = set()
