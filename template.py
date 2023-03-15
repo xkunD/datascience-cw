@@ -19,7 +19,8 @@ def file_exists(file_name):
         boolean: returns True if the file exists and False otherwise.
     """
     return os.path.isfile(file_name)
-        
+
+
 # Function for section 3
 def parse_file(file_name):
     """Read the input file, parse the contents and return a dictionary
@@ -33,17 +34,19 @@ def parse_file(file_name):
         people. The corresponding values are stored in a list that contains
         the names of all the people that the sick person has had contact with.
     """
-    contact_dict = {}
+    contact_dic = {}
+
     with open(file_name, 'r') as file:
         for line in file:
             line = line.strip()
             if line:
                 try:
-                    sick_person, *contacts = line.strip().split(',')
-                    contact_dict[sick_person] = contacts
+                    patient, *contacts_list = line.strip().split(',')
+                    contact_dic[patient] = contacts_list
                 except ValueError:
                     pretty_print_section_3()
-    return contact_dict
+
+    return contact_dic
 
 
 # Function for section 5
@@ -59,14 +62,13 @@ def find_patients_zero(contacts_dic):
         list: names of people who do not appear in any sick person's contact
         list.
     """
-    # all patients as a set
-    patients = set(contacts_dic.keys())    
-    # all contacts as a set
-    contacts = set().union(*contacts_dic.values())  
-    # patient zeros = patients - contacts
-    patient_zero = list(patients - contacts)  
+    patients = set(contacts_dic.keys())                 # all patients as a set
+    contacts = set().union(*contacts_dic.values())      # all contacts as a set
+    # patients zero: in patients but not in contacts
+    patient_zero = list(patients - contacts)            
 
     return sorted(patient_zero)
+
 
 # Function for section 6
 def find_potential_zombies(contacts_dic):
@@ -80,11 +82,13 @@ def find_potential_zombies(contacts_dic):
     Returns:
         list: names of people who are not listed as sick.
     """
-    patients = set(contacts_dic.keys())  # get all contacts in the keys
-    contacts = set().union(*contacts_dic.values())  # get all contacts that are contacted
-    potential_zombies = list(contacts - patients)  # find the potential zombies
-    potential_zombies.sort()
-    return potential_zombies
+    patients = set(contacts_dic.keys())             # get all patients
+    contacts = set().union(*contacts_dic.values())  # get all contacts
+    # potential zombies: in contacts but not in patients
+    potential_zombies = list(contacts - patients) 
+
+    return sorted(potential_zombies)
+
 
 # Function for section 7
 def find_not_zombie_nor_zero(contacts_dic, patients_zero_list, zombie_list):
@@ -101,10 +105,13 @@ def find_not_zombie_nor_zero(contacts_dic, patients_zero_list, zombie_list):
     Returns:
         list: people who are neither a zombie nor a patient zero.
     """
-    all_names = set(contacts_dic.keys()).union(*contacts_dic.values())
-    not_zombie_nor_zero = list(all_names - set(patients_zero_list) - set(zombie_list))
-    not_zombie_nor_zero.sort()
-    return not_zombie_nor_zero
+    # get all names of patients and contacts
+    patients = set(contacts_dic.keys()) 
+
+    not_zombie_nor_zero = list(patients - set(patients_zero_list) - set(zombie_list))
+
+    return sorted(not_zombie_nor_zero)
+
 
 # Function for section 8
 def find_most_viral(contacts_dic):
@@ -131,7 +138,8 @@ def find_most_viral(contacts_dic):
             
     most_viral.sort()
     return most_viral
-    
+
+
 # Function for section 9
 def find_most_contacted(contacts_dic):
     """Return the contact or contacts who appear in the most sick persons'
@@ -157,7 +165,8 @@ def find_most_contacted(contacts_dic):
     most_contacted = [contact for contact, count in contact_count.items() if count == max_count]
     most_contacted.sort()
     return most_contacted
-    
+
+
 # Function for section 10
 def find_maximum_distance_from_zombie(contacts_dic, zombie_list):
     """Return the maximum distance from a zombie for everyone in the dataset.
@@ -214,6 +223,7 @@ def find_spreader_zombies(contacts_dic, zombie_list):
             spreader_zombies_list.append(patient)
 
     return spreader_zombies_list
+
 
 def find_regular_zombies(contacts_dic, zombie_list):
     """Return list of sick people that contacted with both potential zombies and people who are already sick.
@@ -288,37 +298,47 @@ def find_cycles_in_data(contacts_dic):
                 return True
     return False
 
+
+
 # Pretty printing functions. You have one function per section that
 # must output a string as specified by contact_tracing.pdf 
 
 def pretty_print_section_3():
     print("Error found in file, continuing.")
 
+
 def pretty_print_section_4(contact_dictionary):
     print("Contact Records:")
     for sick_record in sorted(contact_dictionary):
         print(f"  {sick_record} had contact with {format_list(sorted(contact_dictionary[sick_record]))}")
 
+
 def pretty_print_section_5(patient_zero_list):
     print("\nPatient Zero(s):", format_list(patient_zero_list))
 
+
 def pretty_print_section_6(potential_zombies_list):
     print("Potential Zombies:", format_list(potential_zombies_list))
+
 
 def pretty_print_section_7(not_zombie_or_patient_zero_list):
     print("Neither Patient Zero or Potential Zombie:", \
           format_list(not_zombie_or_patient_zero_list))
 
+
 def pretty_print_section_8(most_viral_list):
     print("Most Viral People:", format_list(most_viral_list))
 
+
 def pretty_print_section_9(most_contacted_list):
     print("Most Contacted:", format_list(most_contacted_list))
+
 
 def pretty_print_section_10(heights_dictionary):
     print("\nHeights:")
     for name, distance in heights_dictionary.items():
         print(f"  {name}: {distance}")
+
 
 # Additional credit printing functions
 
@@ -329,6 +349,7 @@ def pretty_print_section_11(spreader_zombie_list):
     else:
         print("(None)")
 
+
 def pretty_print_section_12(regular_zombie_list):
     print("  Regular Zombies:", end = " ")
     if regular_zombie_list:
@@ -336,12 +357,14 @@ def pretty_print_section_12(regular_zombie_list):
     else:
         print("(None)")
 
+
 def pretty_print_section_13(zombie_predator_list):
     print("  Zombie Predators:", end = " ")
     if zombie_predator_list:
         print(format_list(zombie_predator_list))
     else:
         print("(None)")
+
 
 def pretty_print_section_14(cycles_state):
     print(cycles_state)
