@@ -18,7 +18,6 @@ def file_exists(file_name):
     Returns:
         boolean: returns True if the file exists and False otherwise.
     """
-    # Remove pass and fill in your code here
     return os.path.isfile(file_name)
         
 # Function for section 3
@@ -34,8 +33,6 @@ def parse_file(file_name):
         people. The corresponding values are stored in a list that contains
         the names of all the people that the sick person has had contact with.
     """
-    # Remove pass and fill in your code here
-
     contact_dict = {}
     with open(file_name, 'r') as file:
         for line in file:
@@ -45,7 +42,7 @@ def parse_file(file_name):
                     sick_person, *contacts = line.strip().split(',')
                     contact_dict[sick_person] = contacts
                     # if not sick_person or not contacts:
-                    #     print("Error found in file, continuing.")
+                    #     raist ValueError
                     # continue
                 except ValueError:
                     print("Error found in file, continuing.")
@@ -66,7 +63,6 @@ def find_patients_zero(contacts_dic):
         list: names of people who do not appear in any sick person's contact
         list.
     """
-
     patients = set(contacts_dic.keys())  # all patients as a set
     contacts = set().union(*contacts_dic.values())  # all contacts as a set
     patient_zero = list(patients - contacts)  # find the patient zeros
@@ -84,8 +80,6 @@ def find_potential_zombies(contacts_dic):
     Returns:
         list: names of people who are not listed as sick.
     """
-    # Remove pass and fill in your code here
-
     patients = set(contacts_dic.keys())  # get all contacts in the keys
     contacts = set().union(*contacts_dic.values())  # get all contacts that are contacted
     potential_zombies = list(contacts - patients)  # find the potential zombies
@@ -107,7 +101,6 @@ def find_not_zombie_nor_zero(contacts_dic, patients_zero_list, zombie_list):
     Returns:
         list: people who are neither a zombie nor a patient zero.
     """
-    # Remove pass and fill in your code here
     all_names = set(contacts_dic.keys()).union(*contacts_dic.values())
     not_zombie_nor_zero = list(all_names - set(patients_zero_list) - set(zombie_list))
     not_zombie_nor_zero.sort()
@@ -197,6 +190,16 @@ def find_maximum_distance_from_zombie(contacts_dic, zombie_list):
 # "Additional Credit" Functions here
 
 def find_spreader_zombies(contacts_dic, zombie_list):
+    """Return list of sick people who only contacted with potential zombies.
+
+    Args:
+        contacts_dic (dic): each entry is a sick person's name and their list
+        of contacts.
+        zombie_list (list): all zombies
+
+    Returns:
+        list: contains the names of sick people who only contacted with potential zombies.
+    """
     # spreader: only contact with potential zombie (so all contact in zombie list)
     spreader_zombies_list = []
     for patient in contacts_dic.keys():
@@ -209,6 +212,16 @@ def find_spreader_zombies(contacts_dic, zombie_list):
     return spreader_zombies_list
 
 def find_regular_zombies(contacts_dic, zombie_list):
+    """Return list of sick people that contacted with both potential zombies and people who are already sick.
+
+    Args:
+        contacts_dic (dic): each entry is a sick person's name and their list
+        of contacts.
+        zombie_list (list): all zombies
+
+    Returns:
+        list: contains the names of sick people who contacted with both potential zombies and people who are already sick.
+    """
     regular_zombies_list = []
     patient_list = contacts_dic.keys()
     for patient in patient_list:
@@ -228,6 +241,16 @@ def find_regular_zombies(contacts_dic, zombie_list):
 
 
 def find_predator_zombies(contacts_dic, zombie_list):
+    """Return list of sick people that only has contact with people who are sick.
+
+    Args:
+        contacts_dic (dic): each entry is a sick person's name and their list
+        of contacts.
+        zombie_list (list): all zombies
+
+    Returns:
+        list: contains the names of sick people who contacted with both potential zombies and people who are already sick.
+    """
     # predator: all contacts are patients
     predator_zombies_list = []
     patient_list = contacts_dic.keys()
@@ -237,29 +260,24 @@ def find_predator_zombies(contacts_dic, zombie_list):
     return predator_zombies_list
 
 
+def depth_first_search(patient, visited, stack, contacts_dic):
+    visited.add(patient)
+    stack.add(patient)
+    for contact in contacts_dic.get(patient, []):
+        if contact not in visited:
+            if depth_first_search(contact, visited, stack, contacts_dic):
+                return True
+        elif contact in stack:
+            return True
+    stack.remove(patient)
+    return False 
+
 def find_cycles_in_data(contacts_dic):
     visited = set()
-    stack = set()
-
-    # Check for cycles in each node
-    for node in contacts_dic:
-        if node not in visited:
-            visited.add(node)
-            stack.add(node)
-
-            # DFS on the node
-            while stack:
-                current_node = stack.pop()
-                for neighbor in contacts_dic.get(current_node, []):
-                    if neighbor not in visited:
-                        visited.add(neighbor)
-                        stack.add(neighbor)
-                    elif neighbor in stack:
-                        return True
-
-            # Remove nodes from stack after DFS
-            stack.clear()
-
+    for patient in contacts_dic:
+        if patient not in visited:
+            if depth_first_search(patient, visited, set(), contacts_dic):
+                return True
     return False
 
 # Pretty printing functions. You have one function per section that
