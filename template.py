@@ -246,7 +246,7 @@ def find_regular_zombies(contacts_dic, zombie_list):
     for patient, contacts in contacts_dic.items():
         contact_with_patient = set(patient_list).intersection(contacts)
         contact_with_zombie = set(zombie_list).intersection(contacts)
-        
+
         if contact_with_patient and contact_with_zombie:
             regular_zombies_list.append(patient)
 
@@ -267,8 +267,8 @@ def find_predator_zombies(contacts_dic, zombie_list):
     # predator: all contacts are patients
     predator_zombies_list = []
     patient_list = contacts_dic.keys()
-    for patient, contacts_list in contacts_dic:
-        if all(contact in patient_list for contact in contacts_list):
+    for patient in patient_list:
+        if all(contact in patient_list for contact in contacts_dic[patient]):
             predator_zombies_list.append(patient)
     return predator_zombies_list
 
