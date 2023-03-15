@@ -305,8 +305,9 @@ def pretty_print_section_3():
 
 def pretty_print_section_4(contact_dictionary):
     print("Contact Records:")
-    for sick_record in sorted(contact_dictionary):
-        print(f"  {sick_record} had contact with {format_list(sorted(contact_dictionary[sick_record]))}")
+    for patient, contacts_list in sorted(contact_dictionary.items()):
+        format_contacts = format_list(contacts_list)
+        print(f"  {patient} had contact with {format_contacts}")
 
 
 def pretty_print_section_5(patient_zero_list):
