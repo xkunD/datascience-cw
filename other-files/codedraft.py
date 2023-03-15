@@ -276,7 +276,7 @@ def pretty_print_section_13(zombie_predator_list):
 def main():
     
     # print(file_exists("sfadsf"))
-    # print(parse_file("testfile.txt"))
+    print(parse_file("testfile.txt"))
     # pretty_print_section_4(parse_file("testfile.txt"))
     # pretty_print_section_5(find_patients_zero(parse_file("DataSet1.txt")))
     dic = parse_file("DataSet1.txt")

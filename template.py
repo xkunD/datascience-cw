@@ -41,12 +41,8 @@ def parse_file(file_name):
                 try:
                     sick_person, *contacts = line.strip().split(',')
                     contact_dict[sick_person] = contacts
-                    # if not sick_person or not contacts:
-                    #     raist ValueError
-                    # continue
                 except ValueError:
-                    print("Error found in file, continuing.")
-                    # continue
+                    pretty_print_section_3()
     return contact_dict
 
 
@@ -63,9 +59,13 @@ def find_patients_zero(contacts_dic):
         list: names of people who do not appear in any sick person's contact
         list.
     """
-    patients = set(contacts_dic.keys())  # all patients as a set
-    contacts = set().union(*contacts_dic.values())  # all contacts as a set
-    patient_zero = list(patients - contacts)  # find the patient zeros
+    # all patients as a set
+    patients = set(contacts_dic.keys())    
+    # all contacts as a set
+    contacts = set().union(*contacts_dic.values())  
+    # patient zeros = patients - contacts
+    patient_zero = list(patients - contacts)  
+
     return sorted(patient_zero)
 
 # Function for section 6
@@ -177,6 +177,7 @@ def find_maximum_distance_from_zombie(contacts_dic, zombie_list):
     patient_list = contacts_dic.keys()
     heights_dic = dict.fromkeys(patient_list | zombie_list, 0)
     changed = True
+
     while changed:
         changed = False
         for patient in contacts_dic.keys():
@@ -184,6 +185,7 @@ def find_maximum_distance_from_zombie(contacts_dic, zombie_list):
                 if heights_dic[patient] <= heights_dic[contact]:
                     heights_dic[patient] = heights_dic[contact] + 1
                     changed = True
+
     return heights_dic
 
 
@@ -202,6 +204,7 @@ def find_spreader_zombies(contacts_dic, zombie_list):
     """
     # spreader: only contact with potential zombie (so all contact in zombie list)
     spreader_zombies_list = []
+
     for patient in contacts_dic.keys():
         is_spreader = True
         for contact in contacts_dic[patient]:
@@ -209,6 +212,7 @@ def find_spreader_zombies(contacts_dic, zombie_list):
                 is_spreader = False # while loop instead of for?
         if is_spreader:
             spreader_zombies_list.append(patient)
+
     return spreader_zombies_list
 
 def find_regular_zombies(contacts_dic, zombie_list):
@@ -224,10 +228,12 @@ def find_regular_zombies(contacts_dic, zombie_list):
     """
     regular_zombies_list = []
     patient_list = contacts_dic.keys()
+
     for patient in patient_list:
         index = 0
         contact_with_patient = contact_with_zombie = False
         contact_list = contacts_dic[patient]
+
         while (not contact_with_patient or not contact_with_zombie)\
               and index < len(contact_list):
             if contact_list[index] in patient_list:
@@ -235,8 +241,10 @@ def find_regular_zombies(contacts_dic, zombie_list):
             elif contact_list[index] in zombie_list:
                 contact_with_zombie = True
             index += 1
+
         if contact_with_zombie and contact_with_patient:
             regular_zombies_list.append(patient)
+
     return regular_zombies_list
 
 
