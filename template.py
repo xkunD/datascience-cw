@@ -64,10 +64,10 @@ def find_patients_zero(contacts_dic):
     """
     patients = set(contacts_dic.keys())                 # all patients as a set
     contacts = set().union(*contacts_dic.values())      # all contacts as a set
-    # patients zero: in patients but not in contacts
-    patient_zero = list(patients - contacts)            
+    
+    patients_zero = list(patients - contacts)       # get people not in contacts      
 
-    return sorted(patient_zero)
+    return sorted(patients_zero)
 
 
 # Function for section 6
@@ -82,10 +82,10 @@ def find_potential_zombies(contacts_dic):
     Returns:
         list: names of people who are not listed as sick.
     """
-    patients = set(contacts_dic.keys())             # get all patients
-    contacts = set().union(*contacts_dic.values())  # get all contacts
-    # potential zombies: in contacts but not in patients
-    potential_zombies = list(contacts - patients) 
+    patients = set(contacts_dic.keys())             # all patients as a set
+    contacts = set().union(*contacts_dic.values())  # all contacts as a set
+
+    potential_zombies = list(contacts - patients)   # get non-sick contacts
 
     return sorted(potential_zombies)
 
@@ -105,12 +105,15 @@ def find_not_zombie_nor_zero(contacts_dic, patients_zero_list, zombie_list):
     Returns:
         list: people who are neither a zombie nor a patient zero.
     """
-    # get all names of patients and contacts
-    patients = set(contacts_dic.keys()) 
+    
+    # all patients as a set
+    patients = set(contacts_dic.keys())            
+    
+    # get people not in both
+    not_zombie_nor_zero_list = \
+        list(patients - set(patients_zero_list) - set(zombie_list))
 
-    not_zombie_nor_zero = list(patients - set(patients_zero_list) - set(zombie_list))
-
-    return sorted(not_zombie_nor_zero)
+    return sorted(not_zombie_nor_zero_list)
 
 
 # Function for section 8
@@ -127,17 +130,19 @@ def find_most_viral(contacts_dic):
         lists
     """
     max_len = 0
-    most_viral = []
+    most_viral_list = []
 
-    for patient, contacts_lst in contacts_dic.items():
-        if len(contacts_lst) > max_len:
-            max_len = len(contacts_lst)
-            most_viral = [patient]
-        elif len(contacts_lst) == max_len:
-            most_viral.append(patient)
+    for patient, contacts_list in contacts_dic.items():       
+        if len(contacts_list) > max_len:
+            # person with larger max contacts found
+            max_len = len(contacts_list)
+            most_viral_list = [patient]
+        
+        elif len(contacts_list) == max_len:
+            # people with same max contacts found
+            most_viral_list.append(patient)
             
-    most_viral.sort()
-    return most_viral
+    return sorted(most_viral_list)
 
 
 # Function for section 9
@@ -153,18 +158,17 @@ def find_most_contacted(contacts_dic):
         list: contains the names of contacts who appear in the most sick
         persons' contact list.
     """
-    contact_count = {}
+    count_dic = {}
     for contact_list in contacts_dic.values():
         for name in contact_list:
-            if name in contact_count:
-                contact_count[name] += 1
-            else:
-                contact_count[name] = 1
+            count_dic[name] = count_dic.get(name, 0) + 1
     
-    max_count = max(contact_count.values())
-    most_contacted = [contact for contact, count in contact_count.items() if count == max_count]
-    most_contacted.sort()
-    return most_contacted
+    max_count = max(count_dic.values())
+
+    most_contacted_list = [contact for contact, count in count_dic.items() 
+                      if count == max_count]
+
+    return sorted(most_contacted_list)
 
 
 # Function for section 10
@@ -239,20 +243,11 @@ def find_regular_zombies(contacts_dic, zombie_list):
     regular_zombies_list = []
     patient_list = contacts_dic.keys()
 
-    for patient in patient_list:
-        index = 0
-        contact_with_patient = contact_with_zombie = False
-        contact_list = contacts_dic[patient]
-
-        while (not contact_with_patient or not contact_with_zombie)\
-              and index < len(contact_list):
-            if contact_list[index] in patient_list:
-                contact_with_patient = True
-            elif contact_list[index] in zombie_list:
-                contact_with_zombie = True
-            index += 1
-
-        if contact_with_zombie and contact_with_patient:
+    for patient, contacts in contacts_dic.items():
+        contact_with_patient = set(patient_list).intersection(contacts)
+        contact_with_zombie = set(zombie_list).intersection(contacts)
+        
+        if contact_with_patient and contact_with_zombie:
             regular_zombies_list.append(patient)
 
     return regular_zombies_list
@@ -272,8 +267,8 @@ def find_predator_zombies(contacts_dic, zombie_list):
     # predator: all contacts are patients
     predator_zombies_list = []
     patient_list = contacts_dic.keys()
-    for patient in patient_list:
-        if all(contact in patient_list for contact in contacts_dic[patient]):
+    for patient, contacts_list in contacts_dic:
+        if all(contact in patient_list for contact in contacts_list):
             predator_zombies_list.append(patient)
     return predator_zombies_list
 

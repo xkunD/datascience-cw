@@ -180,10 +180,12 @@ def find_spreader_zombies(contacts_dic, zombie_list):
 def find_regular_zombies(contacts_dic, zombie_list):
     regular_zombies_list = []
     patient_list = contacts_dic.keys()
+
     for patient in patient_list:
         index = 0
         contact_with_patient = contact_with_zombie = False
         contact_list = contacts_dic[patient]
+
         while (not contact_with_patient or not contact_with_zombie)\
               and index < len(contact_list):
             if contact_list[index] in patient_list:
@@ -191,9 +193,12 @@ def find_regular_zombies(contacts_dic, zombie_list):
             elif contact_list[index] in zombie_list:
                 contact_with_zombie = True
             index += 1
+
         if contact_with_zombie and contact_with_patient:
             regular_zombies_list.append(patient)
+
     return regular_zombies_list
+
 
 def find_predator_zombies(contacts_dic, zombie_list):
     # 一种是出现在了contact list里面但不是病人，也就是potential zombie；  - 不考虑了
