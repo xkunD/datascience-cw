@@ -60,10 +60,12 @@ def find_patients_zero(contacts_dic):
         list: names of people who do not appear in any sick person's contact
         list.
     """
-    patients = set(contacts_dic.keys())                 # all patients as a set
-    contacts = set().union(*contacts_dic.values())      # all contacts as a set
+    # find all patients and contacts as sets
+    patients = set(contacts_dic.keys()) 
+    contacts = set().union(*contacts_dic.values())
     
-    patients_zero = list(patients - contacts)       # get people not in contacts      
+    # find patients who are not in anyone's contact list
+    patients_zero = list(patients - contacts)             
 
     return sorted(patients_zero)
 
@@ -80,10 +82,12 @@ def find_potential_zombies(contacts_dic):
     Returns:
         list: names of people who are not listed as sick.
     """
-    patients = set(contacts_dic.keys())             # all patients as a set
-    contacts = set().union(*contacts_dic.values())  # all contacts as a set
+    # find all patients and contacts as sets
+    patients = set(contacts_dic.keys())             
+    contacts = set().union(*contacts_dic.values())  
 
-    potential_zombies = list(contacts - patients)   # get non-sick contacts
+    # find contacts who is not a patient
+    potential_zombies = list(contacts - patients)   
 
     return sorted(potential_zombies)
 
@@ -107,7 +111,7 @@ def find_not_zombie_nor_zero(contacts_dic, patients_zero_list, zombie_list):
     # all patients as a set
     patients = set(contacts_dic.keys())            
     
-    # get people not in both
+    # get patients who's contacts are not in either list
     not_zombie_nor_zero_list = \
         list(patients - set(patients_zero_list) - set(zombie_list))
 
@@ -132,12 +136,12 @@ def find_most_viral(contacts_dic):
 
     for patient, contacts_list in contacts_dic.items():       
         if len(contacts_list) > max_len:
-            # person with larger max contacts found
+            # found person with larger max contacts
             max_len = len(contacts_list)
             most_viral_list = [patient]
         
         elif len(contacts_list) == max_len:
-            # people with same max contacts found
+            # found person with same max contacts
             most_viral_list.append(patient)
             
     return sorted(most_viral_list)
@@ -156,15 +160,19 @@ def find_most_contacted(contacts_dic):
         list: contains the names of contacts who appear in the most sick
         persons' contact list.
     """
-    count_dic = {}
-    for contact_list in contacts_dic.values():
-        for name in contact_list:
+    # count the number of times each contact appears to a dictionary
+    count_dic = {} 
+    for contacts_list in contacts_dic.values():
+        for name in contacts_list:
             count_dic[name] = count_dic.get(name, 0) + 1
-    
-    max_count = max(count_dic.values())
 
-    most_contacted_list = [contact for contact, count in count_dic.items() 
-                      if count == max_count]
+    max_count = max(count_dic.values())     # find the maximum count
+
+    # find contacts whose count == maximum_count
+    most_contacted_list = []
+    for name, count in count_dic.items():
+        if count == max_count:
+            most_contacted_list.append(name)
 
     return sorted(most_contacted_list)
 
@@ -184,7 +192,7 @@ def find_maximum_distance_from_zombie(contacts_dic, zombie_list):
     Returns:
         dic: contains heights (maximum distance) of person from a zombie
     """
-    # create dictionary and set distances of all people to 0
+    # create a dic and set distances of all people to 0
     patient_list = contacts_dic.keys()
     heights_dic = dict.fromkeys(patient_list | zombie_list, 0)
     changed = True
