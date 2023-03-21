@@ -165,7 +165,7 @@ def find_maximum_distance_from_zombie(contacts_dic, zombie_list):
 
 # section 11
 
-def find_spreader_zombies(contacts_dic, zombie_list):
+def find_spreader_zombies_old(contacts_dic, zombie_list):
     spreader_zombies_list = []
     for patient in contacts_dic.keys():
         is_spreader = True
@@ -173,6 +173,14 @@ def find_spreader_zombies(contacts_dic, zombie_list):
             if contact not in zombie_list:
                 is_spreader = False
         if is_spreader:
+            spreader_zombies_list.append(patient)
+    return spreader_zombies_list
+
+
+def find_spreader_zombies(contacts_dic, zombie_list):
+    spreader_zombies_list = []
+    for patient, contacts_list in contacts_dic.items():
+        if all (contact in zombie_list for contact in contacts_list):
             spreader_zombies_list.append(patient)
     return spreader_zombies_list
 
