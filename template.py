@@ -270,6 +270,19 @@ def find_predator_zombies(contacts_dic, zombie_list):
 
 
 def depth_first_search(patient, visited, stack, contacts_dic):
+    """Performs a depth-first search (DFS) to detect cycles in a directed graph represented as a dictionary of contacts.
+
+    Args:
+        patient (str): The patient to start the DFS form.
+        visited (set): A set of previously visited patients.
+        stack (set): A set of patients currently in the DFS stack.
+        contacts_dic (dic): each entry is a sick person's name and their list
+        of contacts.
+        zombie_list (list): all zombies
+
+    Returns:
+        bool: return True if a cycle is detected and False otherwise.
+    """
     visited.add(patient)
     stack.add(patient)
     for contact in contacts_dic.get(patient, []):
@@ -283,6 +296,15 @@ def depth_first_search(patient, visited, stack, contacts_dic):
 
 
 def find_cycles_in_data(contacts_dic):
+    """Find whether the input dataset has a cycle or not.
+
+    Args:
+        contacts_dic (dic): each entry is a sick person's name and their list
+        of contacts.
+
+    Returns:
+        bool: return True if a cycle is detected and False otherwise.
+    """
     visited = set()
     for patient in contacts_dic:
         if patient not in visited:
