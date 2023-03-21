@@ -16,17 +16,17 @@ Most Viral People: Bob
 Most Contacted: Leanne and Mark
 
 Heights:
-  Mark: 2
-  Paul: 2
-  Philip: 0
-  Carol: 3
-  Bob: 4
-  Farley: 3
-  Will: 3
-  Zach: 1
   Larry: 4
   Sarai: 0
+  Paul: 2
+  Will: 3
+  Zach: 1
   Leanne: 1
+  Bob: 4
+  Mark: 2
+  Philip: 0
+  Carol: 3
+  Farley: 3
   Spreader Zombies: Leanne and Zach
   Regular Zombies: Mark
   Zombie Predators: Bob, Carol, Farley, Larry, Paul and Will

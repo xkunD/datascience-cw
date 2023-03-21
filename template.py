@@ -41,7 +41,7 @@ def parse_file(file_name):
             line = line.strip()
             if line:
                 try:
-                    patient, *contacts_list = line.strip().split(',')
+                    patient, *contacts_list = line.rstrip().split(',')
                     contact_dic[patient] = contacts_list
                 except ValueError:
                     pretty_print_section_3()

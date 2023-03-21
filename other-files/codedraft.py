@@ -29,15 +29,17 @@ def parse_file(file_name):
     contact_dict = {}
     with open(file_name, 'r') as f:
         for line in f:
-            try:
-                sick_person, *contacts = line.strip().split(',')
-                contact_dict[sick_person] = contacts
-                # if not sick_person or not contacts:
-                #     print("Error found in file, continuing.")
-                # continue
-            except ValueError:
-                print("Error found in file, continuing.")
-                continue
+            line = line.strip()
+            if line:
+                try:
+                    sick_person, *contacts = line.rstrip().split(',')
+                    contact_dict[sick_person] = contacts
+                    # if not sick_person or not contacts:
+                    #     print("Error found in file, continuing.")
+                    # continue
+                except ValueError:
+                    print("Error found in file, continuing.")
+                    continue
     return contact_dict
         
 
