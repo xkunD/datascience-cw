@@ -38,13 +38,11 @@ def parse_file(file_name):
 
     with open(file_name, 'r') as file:
         for line in file:
-            line = line.strip()
-            if line:
-                try:
-                    patient, *contacts_list = line.rstrip().split(',')
-                    contact_dic[patient] = contacts_list
-                except ValueError:
-                    pretty_print_section_3()
+            try:
+                patient, *contacts_list = line.rstrip().split(',')
+                contact_dic[patient] = contacts_list
+            except ValueError:
+                pretty_print_section_3()
 
     return contact_dic
 

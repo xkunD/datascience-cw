@@ -16,21 +16,89 @@ Most Viral People: Bob
 Most Contacted: Leanne and Mark
 
 Heights:
-  Larry: 4
-  Sarai: 0
-  Paul: 2
-  Will: 3
-  Zach: 1
-  Leanne: 1
-  Bob: 4
-  Mark: 2
-  Philip: 0
-  Carol: 3
   Farley: 3
+  Sarai: 0
+  Philip: 0
+  Zach: 1
+  Larry: 4
+  Will: 3
+  Carol: 3
+  Mark: 2
+  Leanne: 1
+  Paul: 2
+  Bob: 4
   Spreader Zombies: Leanne and Zach
   Regular Zombies: Mark
   Zombie Predators: Bob, Carol, Farley, Larry, Paul and Will
+successful Yvonne,Carol,Mike
+
+successful Ruth,Grace
+
+successful Carol,Tina
+
+successful Grace,Judy
+
+successful Tina,Carol
+
+successful Dave,Carol,Tina,Helen
+
+successful Judy,Yvonne,Carol,Mike,Tina,Frank
+
+successful Frank,Yvonne,Ruth,Carol,Tina,Judy
+
 {'Yvonne': ['Carol', 'Mike'], 'Ruth': ['Grace'], 'Carol': ['Tina'], 'Grace': ['Judy'], 'Tina': ['Carol'], 'Dave': ['Carol', 'Tina', 'Helen'], 'Judy': ['Yvonne', 'Carol', 'Mike', 'Tina', 'Frank'], 'Frank': ['Yvonne', 'Ruth', 'Carol', 'Tina', 'Judy']}
+successful Linda,Xavier,Ursula
+
+successful Victor,Zoe,Mike,Nancy
+
+successful Zoe,Tina
+
+successful Xavier,Zoe,Nancy
+
+successful Karl,Linda,Mike
+
+successful Mike,Victor,Karl
+
+successful Tina,Judy,Karl,Ursula
+
+successful Nancy,Linda,Xavier,Mike
+
+successful Ursula,Victor
+
 True
+successful Yvonne,Carol,Mike
+
+successful Ruth,Grace
+
+successful Carol,Tina
+
+successful Grace,Judy
+
+successful Tina,Carol
+
+successful Dave,Carol,Tina,Helen
+
+successful Judy,Yvonne,Carol,Mike,Tina,Frank
+
+successful Frank,Yvonne,Ruth,Carol,Tina,Judy
+
 True
+successful Bob,Paul,Mark,Carol,Leanne,Will
+
+successful Carol,Mark,Leanne
+
+successful Farley,Paul
+
+successful Leanne,Sarai
+
+successful Larry,Carol,Mark,Leanne,Will
+
+successful Mark,Philip,Zach
+
+successful Paul,Zach
+
+successful Will,Leanne,Mark
+
+successful Zach,Philip
+
 False
