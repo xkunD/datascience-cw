@@ -195,9 +195,9 @@ def find_maximum_distance_from_zombie(contacts_dic, zombie_list):
     # create a dic and set distances of all people to 0
     patient_list = contacts_dic.keys()
     heights_dic = dict.fromkeys(patient_list | zombie_list, 0)
+    
     changed = True
-
-    while changed:
+    while changed:              
         changed = False
         for patient in contacts_dic.keys():
             for contact in contacts_dic[patient]:
@@ -219,20 +219,22 @@ def find_spreader_zombies(contacts_dic, zombie_list):
         zombie_list (list): all zombies
 
     Returns:
-        list: contains the names of sick people who only contacted with potential zombies.
+        list: contains the names of sick people who only contacted with 
+        potential zombies.
     """
-    # spreader: only contact with potential zombie (so all contact in zombie list)
     spreader_zombies_list = []
 
     for patient, contacts_list in contacts_dic.items():
         if all (contact in zombie_list for contact in contacts_list):
+            # when this paitent's contacts are all zombie
             spreader_zombies_list.append(patient)
 
     return spreader_zombies_list
 
 
 def find_regular_zombies(contacts_dic, zombie_list):
-    """Return list of sick people that contacted with both potential zombies and people who are already sick.
+    """Return list of sick people that contacted with both potential zombies 
+       and people who are already sick.
 
     Args:
         contacts_dic (dic): each entry is a sick person's name and their list
@@ -240,15 +242,17 @@ def find_regular_zombies(contacts_dic, zombie_list):
         zombie_list (list): all zombies
 
     Returns:
-        list: contains the names of sick people who contacted with both potential zombies and other sick people.
+        list: contains the names of sick people who contacted with both 
+        potential zombies and other sick people.
     """
     regular_zombies_list = []
     patients_list = contacts_dic.keys()
 
     for patient, contacts in contacts_dic.items():
+        # check if this patient contacted with other patients / zombies
         contact_with_patient = set(patients_list).intersection(contacts)
         contact_with_zombie = set(zombie_list).intersection(contacts)
-
+        # if has contacts with both:
         if contact_with_patient and contact_with_zombie:
             regular_zombies_list.append(patient)
 
@@ -264,19 +268,24 @@ def find_predator_zombies(contacts_dic, zombie_list):
         zombie_list (list): all zombies
 
     Returns:
-        list: contains the names of sick people who only contacted with people who are already sick.
+        list: contains the names of sick people who only contacted with people 
+        who are already sick.
     """
     # predator: all contacts are patients
     predator_zombies_list = []
     patient_list = contacts_dic.keys()
+
     for patient, contacts_list in contacts_dic.items():
         if all(contact in patient_list for contact in contacts_list):
+            # if this paitent's contacts are all in patient list
             predator_zombies_list.append(patient)
+
     return predator_zombies_list
 
 
 def depth_first_search(patient, visited, stack, contacts_dic):
-    """Performs a depth-first search (DFS) to detect cycles in a directed graph represented as a dictionary of contacts.
+    """Performs a depth-first search (DFS) to detect cycles in a directed 
+       graph represented as a dictionary of contacts.
 
     Args:
         patient (str): The patient to start the DFS form.
@@ -291,13 +300,15 @@ def depth_first_search(patient, visited, stack, contacts_dic):
     """
     visited.add(patient)
     stack.add(patient)
+
     for contact in contacts_dic.get(patient, []):
-        if contact not in visited:
+        if contact not in visited:      # not visited, continue do dfs
             if depth_first_search(contact, visited, stack, contacts_dic):
                 return True
-        elif contact in stack:
+        elif contact in stack:          # a cycle is found
             return True
-    stack.remove(patient)
+        
+    stack.remove(patient)               # remove processed node   
     return False 
 
 
@@ -312,10 +323,14 @@ def find_cycles_in_data(contacts_dic):
         bool: return True if a cycle is detected and False otherwise.
     """
     visited = set()
+    stack = set()
+    
+    # Perform DFS on each unvisited patient
     for patient in contacts_dic:
         if patient not in visited:
-            if depth_first_search(patient, visited, set(), contacts_dic):
-                return True
+            if depth_first_search(patient, visited, stack, contacts_dic):
+                return True         
+            
     return False
 
 
