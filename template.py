@@ -39,9 +39,11 @@ def parse_file(file_name):
     with open(file_name, 'r') as file:
         for line in file:
             try:
+                # split the line into patient and contacts
                 patient, *contacts_list = line.rstrip().split(',')
                 contact_dic[patient] = contacts_list
             except ValueError:
+                # print message when error is caught
                 pretty_print_section_3()
 
     return contact_dic
@@ -67,7 +69,7 @@ def find_patients_zero(contacts_dic):
     # find patients who are not in anyone's contact list
     patients_zero = list(patients - contacts)             
 
-    return sorted(patients_zero)
+    return patients_zero
 
 
 # Function for section 6
@@ -89,7 +91,7 @@ def find_potential_zombies(contacts_dic):
     # find contacts who is not a patient
     potential_zombies = list(contacts - patients)   
 
-    return sorted(potential_zombies)
+    return potential_zombies
 
 
 # Function for section 7
@@ -115,7 +117,7 @@ def find_not_zombie_nor_zero(contacts_dic, patients_zero_list, zombie_list):
     not_zombie_nor_zero_list = \
         list(patients - set(patients_zero_list) - set(zombie_list))
 
-    return sorted(not_zombie_nor_zero_list)
+    return not_zombie_nor_zero_list
 
 
 # Function for section 8
@@ -144,7 +146,7 @@ def find_most_viral(contacts_dic):
             # found person with same max contacts
             most_viral_list.append(patient)
             
-    return sorted(most_viral_list)
+    return most_viral_list
 
 
 # Function for section 9
@@ -174,7 +176,7 @@ def find_most_contacted(contacts_dic):
         if count == max_count:
             most_contacted_list.append(name)
 
-    return sorted(most_contacted_list)
+    return most_contacted_list
 
 
 # Function for section 10
@@ -192,12 +194,12 @@ def find_maximum_distance_from_zombie(contacts_dic, zombie_list):
     Returns:
         dic: contains heights (maximum distance) of person from a zombie
     """
-    # create a dic and set distances of all people to 0
+    # create a dic of all people and set distances to 0
     patient_list = contacts_dic.keys()
     heights_dic = dict.fromkeys(patient_list | zombie_list, 0)
     
     changed = True
-    while changed:              
+    while changed:          # while still updating heights
         changed = False
         for patient in contacts_dic.keys():
             for contact in contacts_dic[patient]:
@@ -271,7 +273,6 @@ def find_predator_zombies(contacts_dic, zombie_list):
         list: contains the names of sick people who only contacted with people 
         who are already sick.
     """
-    # predator: all contacts are patients
     predator_zombies_list = []
     patient_list = contacts_dic.keys()
 
@@ -345,28 +346,33 @@ def pretty_print_section_3():
 def pretty_print_section_4(contact_dictionary):
     print("Contact Records:")
     for patient, contacts_list in sorted(contact_dictionary.items()):
-        format_contacts = format_list(contacts_list)
-        print(f"  {patient} had contact with {format_contacts}")
+        formatted_contacts = format_list(contacts_list)
+        print(f"  {patient} had contact with {formatted_contacts}")
 
 
 def pretty_print_section_5(patient_zero_list):
+    patient_zero_list.sort()
     print("\nPatient Zero(s):", format_list(patient_zero_list))
 
 
 def pretty_print_section_6(potential_zombies_list):
+    potential_zombies_list.sort()
     print("Potential Zombies:", format_list(potential_zombies_list))
 
 
 def pretty_print_section_7(not_zombie_or_patient_zero_list):
+    not_zombie_or_patient_zero_list.sort()
     print("Neither Patient Zero or Potential Zombie:", \
           format_list(not_zombie_or_patient_zero_list))
 
 
 def pretty_print_section_8(most_viral_list):
+    most_viral_list.sort()
     print("Most Viral People:", format_list(most_viral_list))
 
 
 def pretty_print_section_9(most_contacted_list):
+    most_contacted_list.sort()
     print("Most Contacted:", format_list(most_contacted_list))
 
 
@@ -380,29 +386,32 @@ def pretty_print_section_10(heights_dictionary):
 
 def pretty_print_section_11(spreader_zombie_list):
     print("  Spreader Zombies:", end = " ")
-    if spreader_zombie_list:
+    if spreader_zombie_list:        # if list is not empty
+        spreader_zombie_list.sort()
         print(format_list(spreader_zombie_list))
-    else:
+    else:                           # if list is empty
         print("(None)")
 
 
 def pretty_print_section_12(regular_zombie_list):
     print("  Regular Zombies:", end = " ")
-    if regular_zombie_list:
+    if regular_zombie_list:         # if list is not empty
+        regular_zombie_list.sort()
         print(format_list(regular_zombie_list))
-    else:
+    else:                           # if list is empty
         print("(None)")
 
 
 def pretty_print_section_13(zombie_predator_list):
     print("  Zombie Predators:", end = " ")
-    if zombie_predator_list:
+    if zombie_predator_list:        # if list is not empty
+        zombie_predator_list.sort()
         print(format_list(zombie_predator_list))
-    else:
+    else:                           # if list is empty
         print("(None)")
 
 
-def pretty_print_section_14(cycles_state):
+def pretty_print_section_14(cycles_state): 
     print(cycles_state)
     
 # =======================================================

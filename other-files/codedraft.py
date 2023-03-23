@@ -286,38 +286,40 @@ def pretty_print_section_13(zombie_predator_list):
         print("(None)")
 
 def main():
-    
-    # print(file_exists("sfadsf"))
-    print(parse_file("testfile.txt"))
-    # pretty_print_section_4(parse_file("testfile.txt"))
-    # pretty_print_section_5(find_patients_zero(parse_file("DataSet1.txt")))
-    dic = parse_file("DataSet1.txt")
-    print(new_parse_file("DataSet1.txt"))
-    # print(find_potential_zombies(parse_file("DataSet1.txt")))
-    # pretty_print_section_7(find_not_zombie_nor_zero(dic,find_patients_zero(dic),find_potential_zombies(dic)))
-    # pretty_print_section_8(find_most_viral(dic))
-    # pretty_print_section_9(find_most_contacted(dic))
-    zombie_list = find_potential_zombies(dic)
-    # pretty_print_section_10(find_maximum_distance_from_zombie(dic, zombie_list))
-    # print(find_spreader_zombies(dic, zombie_list))
+    list = []
+    list.sort()
+    print(list)
+    # # print(file_exists("sfadsf"))
+    # print(parse_file("testfile.txt"))
+    # # pretty_print_section_4(parse_file("testfile.txt"))
+    # # pretty_print_section_5(find_patients_zero(parse_file("DataSet1.txt")))
+    # dic = parse_file("DataSet1.txt")
+    # print(new_parse_file("DataSet1.txt"))
+    # # print(find_potential_zombies(parse_file("DataSet1.txt")))
+    # # pretty_print_section_7(find_not_zombie_nor_zero(dic,find_patients_zero(dic),find_potential_zombies(dic)))
+    # # pretty_print_section_8(find_most_viral(dic))
+    # # pretty_print_section_9(find_most_contacted(dic))
+    # zombie_list = find_potential_zombies(dic)
+    # # pretty_print_section_10(find_maximum_distance_from_zombie(dic, zombie_list))
+    # # print(find_spreader_zombies(dic, zombie_list))
 
-    with open('output.txt', 'w') as file:
-        # Use the redirect_stdout context manager to capture the output of prettyprint
-        with contextlib.redirect_stdout(file):
-            pretty_print_section_4(dic)
-            pretty_print_section_5(find_patients_zero(dic))
-            pretty_print_section_6(find_potential_zombies(dic))
-            pretty_print_section_7(find_not_zombie_nor_zero(dic,find_patients_zero(dic), find_potential_zombies(dic)))                            
-            pretty_print_section_8(find_most_viral(dic)) 
-            pretty_print_section_9(find_most_contacted(dic)) 
-            pretty_print_section_10(find_maximum_distance_from_zombie(dic, zombie_list))   
-            pretty_print_section_11(find_spreader_zombies(dic, zombie_list))  
-            pretty_print_section_12(find_regular_zombies(dic, zombie_list))
-            pretty_print_section_13(find_predator_zombies(dic, zombie_list)) 
-            print(parse_file(('DataSetCycle2.txt')))   
-            print(find_cycles_in_data(parse_file('DataSetCycle1.txt')))   
-            print(find_cycles_in_data(parse_file('DataSetCycle2.txt')))
-            print(find_cycles_in_data(parse_file('DataSet1.txt')))                   
+    # with open('output.txt', 'w') as file:
+    #     # Use the redirect_stdout context manager to capture the output of prettyprint
+    #     with contextlib.redirect_stdout(file):
+    #         pretty_print_section_4(dic)
+    #         pretty_print_section_5(find_patients_zero(dic))
+    #         pretty_print_section_6(find_potential_zombies(dic))
+    #         pretty_print_section_7(find_not_zombie_nor_zero(dic,find_patients_zero(dic), find_potential_zombies(dic)))                            
+    #         pretty_print_section_8(find_most_viral(dic)) 
+    #         pretty_print_section_9(find_most_contacted(dic)) 
+    #         pretty_print_section_10(find_maximum_distance_from_zombie(dic, zombie_list))   
+    #         pretty_print_section_11(find_spreader_zombies(dic, zombie_list))  
+    #         pretty_print_section_12(find_regular_zombies(dic, zombie_list))
+    #         pretty_print_section_13(find_predator_zombies(dic, zombie_list)) 
+    #         print(parse_file(('DataSetCycle2.txt')))   
+    #         print(find_cycles_in_data(parse_file('DataSetCycle1.txt')))   
+    #         print(find_cycles_in_data(parse_file('DataSetCycle2.txt')))
+    #         print(find_cycles_in_data(parse_file('DataSet1.txt')))                   
             
 
 if __name__ == '__main__':
